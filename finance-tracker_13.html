@@ -27,9 +27,9 @@
     --radius-sm: 6px;
     --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
   }
-
+ 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: var(--bg);
@@ -38,7 +38,7 @@
     line-height: 1.5;
     min-height: 100vh;
   }
-
+ 
   /* NAV */
   .nav {
     background: var(--surface);
@@ -88,11 +88,11 @@
     padding: 1px 5px;
     font-weight: 600;
   }
-
+ 
   /* PAGES */
   .page { display: none; padding: 28px 24px; max-width: 900px; margin: 0 auto; }
   .page.active { display: block; }
-
+ 
   /* CARDS */
   .card {
     background: var(--surface);
@@ -116,7 +116,7 @@
     letter-spacing: 0.05em;
   }
   .card-body { padding: 20px; }
-
+ 
   /* SETUP BANNER */
   .setup-banner {
     background: var(--amber-bg);
@@ -131,7 +131,7 @@
   .setup-banner-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
   .setup-banner-text { font-size: 14px; color: var(--amber); line-height: 1.5; }
   .setup-banner-text strong { font-weight: 600; }
-
+ 
   /* BUTTONS */
   .btn {
     display: inline-flex;
@@ -158,7 +158,7 @@
   .btn-secondary:hover { background: var(--surface2); }
   .btn-sm { padding: 5px 10px; font-size: 13px; }
   .btn-danger { background: var(--red); color: white; }
-
+ 
   /* FORM ELEMENTS */
   .form-group { margin-bottom: 16px; }
   .form-label {
@@ -183,7 +183,7 @@
   }
   .form-input:focus { border-color: var(--accent); }
   .form-hint { font-size: 12px; color: var(--text-3); margin-top: 4px; }
-
+ 
   /* RATES GRID */
   .rates-grid {
     display: grid;
@@ -222,7 +222,7 @@
   }
   .rate-input:focus { border-color: var(--accent); }
   .rate-unit { font-size: 13px; color: var(--text-2); }
-
+ 
   /* CATEGORY TABLE */
   .cat-table { width: 100%; border-collapse: collapse; }
   .cat-table th {
@@ -242,7 +242,7 @@
   }
   .cat-table tr:last-child td { border-bottom: none; }
   .cat-table tr:hover td { background: var(--surface2); }
-
+ 
   .cat-name { font-size: 14px; color: var(--text); }
   .cat-select {
     padding: 4px 8px;
@@ -256,7 +256,7 @@
     min-width: 160px;
   }
   .cat-select:focus { border-color: var(--accent); }
-
+ 
   /* TYPE BADGES */
   .type-badge {
     display: inline-block;
@@ -272,7 +272,7 @@
   .type-income-max { background: #FEF0F8; color: #A0409A; }
   .type-ignore { background: var(--surface2); color: var(--text-3); }
   .type-situational { background: #F5EEF8; color: #9B59B6; }
-
+ 
   /* UPLOAD ZONE */
   .upload-zone {
     border: 2px dashed var(--border-strong);
@@ -288,7 +288,7 @@
   .upload-text { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
   .upload-hint { font-size: 13px; color: var(--text-3); }
   #fileInput { display: none; }
-
+ 
   /* MONTH SELECTOR */
   .month-row {
     display: flex;
@@ -314,7 +314,7 @@
     color: white;
     font-weight: 500;
   }
-
+ 
   /* SUMMARY TABLE */
   .summary-table { width: 100%; border-collapse: collapse; }
   .summary-table th {
@@ -346,7 +346,7 @@
   .summary-table tr.total-row td:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
   .val-pos { color: var(--green); }
   .val-neg { color: var(--red); }
-
+ 
   /* DEBT BLOCK */
   .debt-block {
     border-radius: var(--radius);
@@ -383,7 +383,7 @@
     color: var(--text-2);
   }
   .debt-row-item span:last-child { font-weight: 500; color: var(--text); }
-
+ 
   /* SAVINGS BLOCK */
   .savings-grid {
     display: grid;
@@ -399,7 +399,7 @@
   .savings-label { font-size: 11px; font-weight: 600; color: #1A7F5A; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
   .savings-value { font-size: 22px; font-weight: 600; color: var(--green); }
   .savings-sub { font-size: 12px; color: #3A9A6A; margin-top: 3px; }
-
+ 
   /* HISTORY */
   .history-table { width: 100%; border-collapse: collapse; }
   .history-table th {
@@ -421,7 +421,7 @@
   .history-table td:not(:first-child) { text-align: right; }
   .history-table tr:last-child td { border-bottom: none; }
   .history-table tr:hover td { background: var(--surface2); cursor: pointer; }
-
+ 
   /* GOOGLE SETUP */
   .setup-steps { counter-reset: step; }
   .setup-step {
@@ -464,7 +464,7 @@
     font-weight: 600;
     margin-top: 8px;
   }
-
+ 
   /* TAGS */
   .tag {
     display: inline-block;
@@ -474,7 +474,7 @@
     font-weight: 500;
   }
   .tag-month { background: var(--surface2); color: var(--text-2); }
-
+ 
   /* TOAST */
   .toast {
     position: fixed;
@@ -497,7 +497,7 @@
   .toast.show { opacity: 1; transform: translateY(0); }
   .toast.success { background: var(--green); }
   .toast.error { background: var(--red); }
-
+ 
   /* EMPTY STATE */
   .empty-state {
     text-align: center;
@@ -507,7 +507,7 @@
   .empty-state-icon { font-size: 40px; margin-bottom: 12px; }
   .empty-state-title { font-size: 16px; font-weight: 500; color: var(--text-2); margin-bottom: 6px; }
   .empty-state-desc { font-size: 13px; line-height: 1.6; }
-
+ 
   .section-header {
     display: flex;
     align-items: center;
@@ -537,21 +537,26 @@
 </style>
 </head>
 <body>
-
+ 
 <nav class="nav">
   <div class="nav-logo">Бюджет <span>✦</span></div>
   <button class="nav-tab active" onclick="showPage('dashboard')" id="tab-dashboard">📊 Дашборд</button>
   <button class="nav-tab" onclick="showPage('upload')" id="tab-upload">📥 Загрузка</button>
-  <button class="nav-tab" onclick="showPage('settings')" id="tab-settings" id="tab-settings">⚙️ Настройки</button>
-  <button class="nav-tab" onclick="showPage('google')" id="tab-google">🔗 Google</button>
+  <button class="nav-tab" onclick="showPage('settings')" id="tab-settings">⚙️ Настройки</button>
+  <div style="flex:1"></div>
+  <div id="nav-user" style="display:none; align-items:center; gap:10px; padding: 0 8px;">
+    <img id="nav-avatar" style="width:28px; height:28px; border-radius:50%; object-fit:cover;" src="" alt="">
+    <span id="nav-name" style="font-size:13px; color:var(--text-2);"></span>
+    <button class="btn btn-secondary btn-sm" onclick="signOut()">Выйти</button>
+  </div>
 </nav>
-
+ 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
-
+ 
 <!-- ==================== DASHBOARD ==================== -->
 <div class="page active" id="page-dashboard">
-
+ 
   <div id="dashboard-setup-warning" style="display:none">
     <div class="setup-banner">
       <div class="setup-banner-icon">⚠️</div>
@@ -560,7 +565,7 @@
       </div>
     </div>
   </div>
-
+ 
   <div id="dashboard-empty" style="display:none">
     <div class="empty-state">
       <div class="empty-state-icon">📂</div>
@@ -568,16 +573,16 @@
       <div class="empty-state-desc">Перейди в раздел <strong>Загрузка</strong> и загрузи файл из MoneyLover</div>
     </div>
   </div>
-
+ 
   <div id="dashboard-content" style="display:none">
-
+ 
     <!-- Month selector -->
     <div class="section-header">
       <div class="section-title-lg">Обзор</div>
       <div id="last-updated" class="text-muted"></div>
     </div>
     <div class="month-row" id="monthRow"></div>
-
+ 
     <!-- Summary table -->
     <div class="card">
       <div class="card-header">
@@ -600,10 +605,10 @@
         </table>
       </div>
     </div>
-
+ 
     <!-- Debt + Savings row -->
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
-
+ 
       <!-- DEBT -->
       <div>
         <div class="card">
@@ -615,7 +620,7 @@
           </div>
         </div>
       </div>
-
+ 
       <!-- SAVINGS -->
       <div>
         <div class="card">
@@ -627,9 +632,9 @@
           </div>
         </div>
       </div>
-
+ 
     </div>
-
+ 
     <!-- Categories breakdown -->
     <div class="card">
       <div class="card-header">
@@ -650,16 +655,16 @@
         </table>
       </div>
     </div>
-
+ 
   </div>
 </div>
-
+ 
 <!-- ==================== UPLOAD ==================== -->
 <div class="page" id="page-upload">
   <div class="section-header" style="margin-bottom:20px">
     <div class="section-title-lg">Загрузка данных</div>
   </div>
-
+ 
   <div class="card">
     <div class="card-body">
       <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
@@ -670,7 +675,7 @@
       <input type="file" id="fileInput" accept=".xlsx,.xls" onchange="handleFile(event)">
     </div>
   </div>
-
+ 
   <div id="uploadResult" style="display:none">
     <div class="card">
       <div class="card-header">
@@ -679,7 +684,7 @@
       <div class="card-body" id="uploadResultBody"></div>
     </div>
   </div>
-
+ 
   <div class="card">
     <div class="card-header">
       <div class="card-title">История загрузок</div>
@@ -692,14 +697,14 @@
     </div>
   </div>
 </div>
-
+ 
 <!-- ==================== SETTINGS ==================== -->
 <div class="page" id="page-settings">
   <div class="section-header" style="margin-bottom:20px">
     <div class="section-title-lg">Настройки</div>
     <button class="btn btn-primary" onclick="saveSettings()">Сохранить</button>
   </div>
-
+ 
   <!-- Rates -->
   <div class="card">
     <div class="card-header">
@@ -728,7 +733,7 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- Categories -->
   <div class="card">
     <div class="card-header">
@@ -757,116 +762,32 @@
     </div>
   </div>
 </div>
-
-<!-- ==================== GOOGLE ==================== -->
-<div class="page" id="page-google">
-  <div class="section-header" style="margin-bottom:8px">
-    <div class="section-title-lg">Подключение Google Таблицы</div>
-    <div id="google-status-badge" style="display:none" class="connected-badge">✓ Подключено</div>
-  </div>
-  <p style="font-size:14px; color:var(--text-2); margin-bottom:20px; line-height:1.6">
-    Google Таблица будет хранить твои настройки, разметку категорий и историю месяцев. Данные доступны с любого устройства и не пропадут при очистке браузера.
-  </p>
-
-  <div class="card">
-    <div class="card-header"><div class="card-title">Пошаговая настройка</div></div>
-    <div class="card-body">
-      <div class="setup-steps">
-
-        <div class="setup-step">
-          <div class="setup-step-num" id="step1-num">1</div>
-          <div class="setup-step-body">
-            <div class="setup-step-title">Создай проект в Google Cloud</div>
-            <div class="setup-step-desc">
-              Открой <a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a> →
-              нажми <strong>Select a project</strong> вверху → <strong>New Project</strong> →
-              назови например <em>family-budget</em> → нажми <strong>Create</strong>.
-            </div>
-          </div>
-        </div>
-
-        <div class="setup-step">
-          <div class="setup-step-num" id="step2-num">2</div>
-          <div class="setup-step-body">
-            <div class="setup-step-title">Включи Google Sheets API</div>
-            <div class="setup-step-desc">
-              В меню слева → <strong>APIs & Services</strong> → <strong>Library</strong> →
-              найди <em>Google Sheets API</em> → нажми <strong>Enable</strong>.
-            </div>
-          </div>
-        </div>
-
-        <div class="setup-step">
-          <div class="setup-step-num" id="step3-num">3</div>
-          <div class="setup-step-body">
-            <div class="setup-step-title">Создай API ключ</div>
-            <div class="setup-step-desc">
-              <strong>APIs & Services</strong> → <strong>Credentials</strong> →
-              <strong>Create Credentials</strong> → <strong>API key</strong>.
-              Скопируй ключ — он выглядит примерно так: <em>AIzaSyBxxxxxx...</em>
-            </div>
-            <div class="setup-step-input">
-              <input type="text" class="form-input" id="apiKeyInput" placeholder="AIzaSy...">
-            </div>
-          </div>
-        </div>
-
-        <div class="setup-step">
-          <div class="setup-step-num" id="step4-num">4</div>
-          <div class="setup-step-body">
-            <div class="setup-step-title">Создай Google Таблицу</div>
-            <div class="setup-step-desc">
-              Открой <a href="https://sheets.google.com" target="_blank">sheets.google.com</a> →
-              создай новую таблицу → скопируй ID из адресной строки.<br>
-              Пример URL: <em>docs.google.com/spreadsheets/d/<strong>1BxiM...</strong>/edit</em> — нужна часть между /d/ и /edit.
-            </div>
-            <div class="setup-step-input">
-              <input type="text" class="form-input" id="sheetIdInput" placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms">
-            </div>
-          </div>
-        </div>
-
-        <div class="setup-step">
-          <div class="setup-step-num" id="step5-num">5</div>
-          <div class="setup-step-body">
-            <div class="setup-step-title">Открой доступ к таблице</div>
-            <div class="setup-step-desc">
-              В Google Таблице нажми <strong>Share</strong> (Поделиться) →
-              в поле добавь: <em>anyone with the link → Viewer</em> — или просто сделай таблицу
-              доступной по ссылке для просмотра. Для записи нужно будет также настроить OAuth,
-              но сначала проверим базовое подключение.
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div style="margin-top:8px; display:flex; gap:10px; align-items:center">
-        <button class="btn btn-primary" onclick="connectGoogle()">Подключить и проверить</button>
-        <button class="btn btn-secondary" onclick="initLocalMode()">Пока без Google (локально)</button>
-      </div>
-      <div id="google-connect-result" style="margin-top:12px; font-size:13px; color:var(--text-2)"></div>
-    </div>
-  </div>
-
-  <div class="card" id="google-info-card" style="display:none">
-    <div class="card-header"><div class="card-title">Статус подключения</div></div>
-    <div class="card-body" id="google-info-body"></div>
+ 
+<!-- ==================== LOGIN SCREEN ==================== -->
+<div id="login-screen" style="display:none; position:fixed; inset:0; background:var(--bg); z-index:500; align-items:center; justify-content:center;">
+  <div style="text-align:center; padding:40px;">
+    <div style="font-size:48px; margin-bottom:16px;">💰</div>
+    <div style="font-size:24px; font-weight:600; margin-bottom:8px; color:var(--text);">Семейный бюджет</div>
+    <div style="font-size:14px; color:var(--text-2); margin-bottom:32px;">Войди через Google чтобы продолжить</div>
+    <button onclick="signIn()" style="display:inline-flex; align-items:center; gap:10px; padding:12px 24px; border:1px solid var(--border-strong); border-radius:var(--radius); background:var(--surface); font-size:15px; font-weight:500; cursor:pointer; color:var(--text);">
+      <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Войти через Google
+    </button>
+    <div id="login-error" style="margin-top:16px; font-size:13px; color:var(--red); display:none;"></div>
   </div>
 </div>
-
+</div>
+ 
 <script>
 // ==================== STATE ====================
 let appState = {
-  mode: 'local', // 'local' | 'google'
-  googleApiKey: '',
-  googleSheetId: '',
-  rates: { BYN: 3.27, EUR: 1.08 }, // BYN: how many BYN per 1 USD; EUR: how many USD per 1 EUR
+  mode: 'google',
+  rates: { BYN: 3.27, EUR: 1.08 },
   categories: {}, // { catName: 'olya'|'max'|'joint'|'situational'|'income-olya'|'income-max'|'ignore' }
   months: {},     // { '2026-06': { transactions: [], loadedAt: '', txOverrides: {} } }
   currentMonth: null,
 };
-
+ 
 const TYPE_LABELS = {
   'olya': 'Траты Оли',
   'max': 'Траты Макса',
@@ -885,7 +806,7 @@ const TYPE_CLASSES = {
   'income-max': 'type-income-max',
   'ignore': 'type-ignore',
 };
-
+ 
 // ==================== CATEGORY HIERARCHY ====================
 // parent -> children mapping
 const CAT_HIERARCHY = {
@@ -905,13 +826,13 @@ const CAT_HIERARCHY = {
   'Исключённые Расходы': ['Сняла наличные','Перевод Максу'],
   'Исключённые Доходы': ['Перевод Плюс','Наличные Плюс'],
 };
-
+ 
 // reverse map: child -> parent
 const CAT_PARENT = {};
 Object.entries(CAT_HIERARCHY).forEach(([parent, children]) => {
   children.forEach(child => { CAT_PARENT[child] = parent; });
 });
-
+ 
 // all known categories in order (parents first, then orphans)
 const ALL_CATS_ORDERED = [
   'Счета и коммунальные услуги','Электричество','Интернет','Коммуналка','Мобильный телефон',
@@ -937,7 +858,7 @@ const ALL_CATS_ORDERED = [
   'Зарплата','Прочие поступления','Подарки','Командировочные','Доход Макса',
   'Исключённые Доходы','Перевод Плюс','Наличные Плюс',
 ];
-
+ 
 // default types for all known categories
 const DEFAULT_CAT_TYPES = {
   'Счета и коммунальные услуги':'joint','Электричество':'joint','Интернет':'joint','Коммуналка':'joint','Мобильный телефон':'olya',
@@ -967,7 +888,7 @@ const DEFAULT_CAT_TYPES = {
   'Доход Макса':'income-max',
   'Исключённые Доходы':'ignore','Перевод Плюс':'ignore','Наличные Плюс':'ignore',
 };
-
+ 
 // Icons for each category
 const CAT_ICONS = {
   'Счета и коммунальные услуги':'🧾','Электричество':'⚡','Интернет':'🌐','Коммуналка':'🏠','Мобильный телефон':'📱',
@@ -992,19 +913,19 @@ const CAT_ICONS = {
   'Зарплата':'💰','Прочие поступления':'📥','Подарки':'🎁','Командировочные':'🗂','Доход Макса':'👤',
   'Исключённые Доходы':'🚫','Перевод Плюс':'➕','Наличные Плюс':'💵',
 };
-
+ 
 function getEffectiveType(catName, categories) {
   const val = categories[catName];
   // Migrate legacy value 'mine' -> 'olya'
   if (val === 'mine') return DEFAULT_CAT_TYPES[catName] || 'olya';
   return val || DEFAULT_CAT_TYPES[catName] || 'ignore';
 }
-
+ 
 // Get parent category name (null if top-level)
 function getParent(catName) {
   return CAT_PARENT[catName] || null;
 }
-
+ 
 // Get all children of a category (empty array if none)
 function getChildren(catName) {
   return CAT_HIERARCHY[catName] || [];
@@ -1041,8 +962,10 @@ function init() {
   renderDashboard();
   renderHistory();
   checkSetupStatus();
+  // Show login screen on startup
+  document.getElementById('login-screen').style.display = 'flex';
 }
-
+ 
 function checkSetupStatus() {
   const hasRates = appState.rates.BYN > 0 && appState.rates.EUR > 0;
   const setupDone = hasRates;
@@ -1051,7 +974,7 @@ function checkSetupStatus() {
   if (!setupDone) settingsTab.innerHTML = '⚙️ Настройки <span class="badge">!</span>';
   else settingsTab.innerHTML = '⚙️ Настройки';
 }
-
+ 
 // ==================== NAVIGATION ====================
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1061,12 +984,8 @@ function showPage(name) {
   if (name === 'dashboard') renderDashboard();
   if (name === 'settings') renderSettingsCategories();
 }
-
+ 
 // ==================== STORAGE ====================
-function saveToStorage() {
-  localStorage.setItem('budgetApp', JSON.stringify(appState));
-}
-
 function loadFromStorage() {
   const saved = localStorage.getItem('budgetApp');
   if (saved) {
@@ -1081,7 +1000,7 @@ function loadFromStorage() {
     } catch(e) { console.error('Load error', e); }
   }
 }
-
+ 
 // ==================== SETTINGS ====================
 function saveSettings() {
   const byn = parseFloat(document.getElementById('rate-byn').value);
@@ -1099,14 +1018,14 @@ function saveSettings() {
   checkSetupStatus();
   // NOTE: we do NOT recalculate existing months — their snapshots are preserved
 }
-
+ 
 function renderSettingsCategories() {
   const allCats = [...new Set([...ALL_CATS_ORDERED, ...Object.keys(appState.categories)])];
   const body = document.getElementById('catTableBody');
   const emptyEl = document.getElementById('categoriesEmpty');
   const tableEl = document.getElementById('categoriesTable');
   const countLabel = document.getElementById('cat-count-label');
-
+ 
   const hasCats = Object.keys(appState.categories).length > 0 || ALL_CATS_ORDERED.length > 0;
   if (!hasCats) {
     emptyEl.style.display = 'block';
@@ -1115,16 +1034,16 @@ function renderSettingsCategories() {
   }
   emptyEl.style.display = 'none';
   tableEl.style.display = 'block';
-
+ 
   const unmarked = allCats.filter(c => {
     const v = appState.categories[c];
     return !v && !DEFAULT_CAT_TYPES[c];
   }).length;
   countLabel.textContent = unmarked > 0 ? `${unmarked} без разметки` : `${allCats.length} категорий`;
-
+ 
   const INCOME_PARENT_CATS = new Set(['Зарплата','Прочие поступления','Подарки','Командировочные','Доход Макса','Исключённые Доходы']);
   const INCOME_CATS = new Set([...INCOME_PARENT_CATS, 'Перевод Плюс','Наличные Плюс']);
-
+ 
   body.innerHTML = allCats.map(cat => {
     const isChild = !!CAT_PARENT[cat];
     const val = appState.categories[cat] || DEFAULT_CAT_TYPES[cat] || '';
@@ -1132,23 +1051,23 @@ function renderSettingsCategories() {
     const isIncome = INCOME_CATS.has(cat);
     const isIncomeParent = isIncome && isParent;
     const isIncomeChild = isIncome && isChild;
-
+ 
     const sectionHeader = cat === 'Зарплата'
       ? `<tr><td colspan="2" style="padding:12px 20px 8px; font-size:11px; font-weight:700; color:#1A1916; text-transform:uppercase; letter-spacing:0.05em; background:#C9BFF0; border-top:2px solid var(--border-strong);">Доходы</td></tr>`
       : '';
-
+ 
     // Row background
     let rowBg = '';
     if (isIncomeParent) rowBg = 'background:#EDE9F8;';
     else if (isIncome && !isChild) rowBg = 'background:#EDE9F8;'; // standalone income cats too
     else if (!isChild) rowBg = 'background:var(--surface2);'; // all non-children get grey
-
+ 
     // Cell text style
     let cellStyle = '';
     if (isChild && !isIncome) cellStyle = 'padding-left:32px; color:var(--text-2); font-weight:400;';
     else if (isChild && isIncome) cellStyle = 'padding-left:32px; color:var(--text); font-weight:400;';
     else cellStyle = 'font-weight:600; color:var(--text);'; // all non-children: bold black
-
+ 
     const icon = CAT_ICONS[cat] || '•';
     return sectionHeader + `<tr style="${rowBg}">
       <td class="cat-name" style="${cellStyle}">
@@ -1169,13 +1088,13 @@ function renderSettingsCategories() {
     </tr>`;
   }).join('');
 }
-
+ 
 function onCatChange(sel) {
   appState.categories[sel.dataset.cat] = sel.value;
   // auto-save categories immediately
   saveToStorage();
 }
-
+ 
 // ==================== FILE UPLOAD ====================
 const uploadZone = document.getElementById('uploadZone');
 uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag'); });
@@ -1186,13 +1105,13 @@ uploadZone.addEventListener('drop', e => {
   const file = e.dataTransfer.files[0];
   if (file) processFile(file);
 });
-
+ 
 function handleFile(event) {
   const file = event.target.files[0];
   if (file) processFile(file);
   event.target.value = '';
 }
-
+ 
 function processFile(file) {
   const reader = new FileReader();
   reader.onload = function(e) {
@@ -1208,7 +1127,7 @@ function processFile(file) {
   };
   reader.readAsArrayBuffer(file);
 }
-
+ 
 function parseAndStore(data, filename) {
   // Find header row
   const headers = data[0];
@@ -1218,39 +1137,39 @@ function parseAndStore(data, filename) {
   const idxCur = headers.indexOf('Валюта');
   const idxNote = headers.indexOf('Примечание');
   const idxExclude = headers.indexOf('Исключить из отчета');
-
+ 
   if (idxDate === -1 || idxCat === -1) {
     showToast('Неверный формат файла', 'error'); return;
   }
-
+ 
   const transactions = [];
   const newCats = new Set();
   const monthsInFile = new Set();
-
+ 
   for (let i = 1; i < data.length; i++) {
     const row = data[i];
     if (!row[idxDate] || !row[idxCat]) continue;
-
+ 
     // Parse Excel date serial
     const dateSerial = parseFloat(row[idxDate]);
     const date = excelDateToJS(dateSerial);
     if (!date) continue;
-
+ 
     const monthKey = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}`;
     monthsInFile.add(monthKey);
-
+ 
     const amount = parseFloat(row[idxAmt]) || 0;
     const currency = row[idxCur] || 'USD';
     const category = String(row[idxCat] || '').trim();
     const note = row[idxNote] || '';
     const exclude = row[idxExclude];
-
+ 
     if (!category) continue;
     newCats.add(category);
-
+ 
     transactions.push({ date: date.toISOString().slice(0,10), monthKey, amount, currency, category, note, exclude: !!exclude });
   }
-
+ 
   // Add new categories — use default type if known, else empty
   newCats.forEach(cat => {
     if (!appState.categories[cat] && DEFAULT_CAT_TYPES[cat]) {
@@ -1259,21 +1178,21 @@ function parseAndStore(data, filename) {
       appState.categories[cat] = '';
     }
   });
-
+ 
   // Also seed all known categories that haven't been set yet
   ALL_CATS_ORDERED.forEach(cat => {
     if (!appState.categories[cat] && DEFAULT_CAT_TYPES[cat]) {
       appState.categories[cat] = DEFAULT_CAT_TYPES[cat];
     }
   });
-
+ 
   // Group by month and store (overwrite existing month data)
   // Snapshot current rates and categories at time of upload
   const settingsSnapshot = {
     rates: { ...appState.rates },
     categories: { ...appState.categories },
   };
-
+ 
   monthsInFile.forEach(mKey => {
     const monthTxs = transactions.filter(t => t.monthKey === mKey);
     // Preserve existing txOverrides if any (user already resolved situational for this month)
@@ -1286,18 +1205,18 @@ function parseAndStore(data, filename) {
       txOverrides: existingOverrides, // { txIndex: 'olya'|'max'|'joint' }
     };
   });
-
+ 
   const monthsList = [...monthsInFile].sort();
   if (!appState.currentMonth || !appState.months[appState.currentMonth]) {
     appState.currentMonth = monthsList[monthsList.length - 1];
   }
-
+ 
   saveToStorage();
   renderSettingsCategories();
   renderDashboard();
   renderHistory();
   checkSetupStatus();
-
+ 
   // Check for situational transactions that need review
   let situationalCount = 0;
   monthsList.forEach(mKey => {
@@ -1307,7 +1226,7 @@ function parseAndStore(data, filename) {
       if (type === 'situational' && !mData.txOverrides[i]) situationalCount++;
     });
   });
-
+ 
   // Show result
   const resultEl = document.getElementById('uploadResult');
   const resultBody = document.getElementById('uploadResultBody');
@@ -1323,12 +1242,12 @@ function parseAndStore(data, filename) {
     ${situationalCount > 0 ? `<div style="margin-top:8px"><button class="btn btn-sm" style="background:#9B59B6;color:white;border:none;" onclick="showSituationalReview('${monthsList[monthsList.length-1]}')">Разобрать транзакции →</button></div>` : ''}
   `;
   showToast(`Загружено: ${transactions.length} транзакций за ${monthsList.map(formatMonth).join(', ')}`, 'success');
-
+ 
   if (situationalCount > 0) {
     showSituationalReview(monthsList[monthsList.length - 1]);
   }
 }
-
+ 
 function excelDateToJS(serial) {
   if (!serial || isNaN(serial)) return null;
   // Excel epoch: Dec 30, 1899
@@ -1336,7 +1255,7 @@ function excelDateToJS(serial) {
   const excelEpoch = new Date(1899, 11, 30);
   return new Date(excelEpoch.getTime() + Math.round(serial) * msPerDay);
 }
-
+ 
 // ==================== CALCULATIONS ====================
 function toUSD(amount, currency, rates) {
   // rates.BYN = how many BYN per 1 USD (e.g. 3.27)
@@ -1346,20 +1265,20 @@ function toUSD(amount, currency, rates) {
   if (currency === 'EUR') return amount * (rates.EUR || 1);
   return amount;
 }
-
+ 
 function calcMonth(monthKey) {
   const mData = appState.months[monthKey];
   if (!mData) return null;
-
+ 
   // Use the snapshot saved at upload time — not current settings
   const snap = mData.snapshot || { rates: appState.rates, categories: appState.categories };
   const rates = snap.rates;
   const categories = snap.categories;
-
+ 
   let joint = 0, mine = 0, max = 0;
   let incomeOlya = 0, incomeMax = 0;
   const catTotals = {};
-
+ 
   mData.transactions.forEach((tx, i) => {
     let type = getEffectiveType(tx.category, categories);
     // Apply per-transaction override for situational categories
@@ -1370,7 +1289,7 @@ function calcMonth(monthKey) {
     const usd = Math.abs(toUSD(tx.amount, tx.currency, rates));
     if (!catTotals[tx.category]) catTotals[tx.category] = { type, usd: 0 };
     catTotals[tx.category].usd += usd;
-
+ 
     if (tx.amount > 0) {
       if (type === 'income-olya') incomeOlya += usd;
       else if (type === 'income-max') incomeMax += usd;
@@ -1380,13 +1299,13 @@ function calcMonth(monthKey) {
       else if (type === 'max') max += usd;
     }
   });
-
+ 
   const jointEach = joint / 2;
   const olyaTotal = jointEach + mine;
   const maxTotal = jointEach + max;
   const olyaBalance = incomeOlya - olyaTotal;
   const maxBalance = incomeMax - maxTotal;
-
+ 
   // Debt: how much each person paid vs what they should pay
   // Fair share for each = joint/2 + their personal
   // But we don't know who physically paid joint expenses.
@@ -1394,7 +1313,7 @@ function calcMonth(monthKey) {
   // If Olya paid more total than Max, Max owes her half the difference
   // debtThisMonth > 0 means Max owes Olya; < 0 means Olya owes Max
   const debtThisMonth = (olyaTotal - maxTotal) / 2;
-
+ 
   // Cumulative debt from all previous months
   const allMonths = Object.keys(appState.months).sort();
   const monthIndex = allMonths.indexOf(monthKey);
@@ -1403,9 +1322,9 @@ function calcMonth(monthKey) {
     const prev = calcMonthSimple(allMonths[i]);
     if (prev) cumulativeDebt += prev.debtThisMonth;
   }
-
+ 
   const totalDebt = cumulativeDebt + debtThisMonth;
-
+ 
   return {
     joint, mine, max, incomeOlya, incomeMax,
     jointEach, olyaTotal, maxTotal,
@@ -1419,7 +1338,7 @@ function calcMonth(monthKey) {
     snapshot: snap,
   };
 }
-
+ 
 function calcMonthSimple(monthKey) {
   const mData = appState.months[monthKey];
   if (!mData) return null;
@@ -1445,18 +1364,18 @@ function calcMonthSimple(monthKey) {
   const maxTotal = joint/2 + max;
   return { debtThisMonth: (olyaTotal - maxTotal) / 2 };
 }
-
+ 
 // ==================== DASHBOARD ====================
 function renderDashboard() {
   const months = Object.keys(appState.months).sort();
   const hasData = months.length > 0;
   const hasCats = Object.keys(appState.categories).length > 0;
-
+ 
   document.getElementById('dashboard-empty').style.display = (!hasData) ? 'block' : 'none';
   document.getElementById('dashboard-content').style.display = hasData ? 'block' : 'none';
-
+ 
   if (!hasData) return;
-
+ 
   // Month chips
   if (!appState.currentMonth || !appState.months[appState.currentMonth]) {
     appState.currentMonth = months[months.length - 1];
@@ -1465,10 +1384,10 @@ function renderDashboard() {
   monthRow.innerHTML = months.map(m => `
     <button class="month-chip ${m === appState.currentMonth ? 'active' : ''}" onclick="selectMonth('${m}')">${formatMonth(m)}</button>
   `).join('');
-
+ 
   renderMonthData(appState.currentMonth);
 }
-
+ 
 function selectMonth(m) {
   appState.currentMonth = m;
   document.querySelectorAll('.month-chip').forEach(c => {
@@ -1476,16 +1395,16 @@ function selectMonth(m) {
   });
   renderMonthData(m);
 }
-
+ 
 function renderMonthData(monthKey) {
   const calc = calcMonth(monthKey);
   if (!calc) return;
-
+ 
   document.getElementById('dashboard-month-label').textContent = formatMonth(monthKey);
   const snapRates = calc.snapshot?.rates;
   const ratesInfo = snapRates ? `1 USD = ${snapRates.BYN} BYN · 1 EUR = ${snapRates.EUR} USD` : '';
   document.getElementById('last-updated').textContent = `Обновлено: ${calc.loadedAt}${ratesInfo ? ' · Курс: ' + ratesInfo : ''}`;
-
+ 
   // Summary table
   const body = document.getElementById('summaryTableBody');
   body.innerHTML = `
@@ -1514,7 +1433,7 @@ function renderMonthData(monthKey) {
       <td class="${(calc.olyaBalance+calc.maxBalance) >= 0 ? 'val-pos' : 'val-neg'}">${fmtSigned(calc.olyaBalance + calc.maxBalance)}</td>
     </tr>
   `;
-
+ 
   // Debt block
   const debtEl = document.getElementById('debtBlock');
   const totalDebt = calc.totalDebt;
@@ -1543,7 +1462,7 @@ function renderMonthData(monthKey) {
       </div>
     </div>
   `;
-
+ 
   // Savings
   const allMonths = Object.keys(appState.months).sort();
   const monthIndex = allMonths.indexOf(monthKey);
@@ -1564,22 +1483,22 @@ function renderMonthData(monthKey) {
       <div class="savings-sub">нарастающим итогом</div>
     </div>
   `;
-
+ 
   // Categories breakdown — with hierarchy: parents show sum of self + children
   const catBody = document.getElementById('catBreakdownBody');
   const rawTotals = calc.catTotals; // { cat: { type, usd } }
-
+ 
   // Build display list in hierarchy order
   const displayCats = [];
   const seen = new Set();
-
+ 
   // Process in hierarchy order
   ALL_CATS_ORDERED.forEach(cat => {
     if (!rawTotals[cat] && !getChildren(cat).some(c => rawTotals[c])) return; // skip if no data
     seen.add(cat);
     const isParent = !!CAT_HIERARCHY[cat];
     const isChild = !!CAT_PARENT[cat];
-
+ 
     if (isParent) {
       // Sum self + all children
       let parentUsd = (rawTotals[cat] ? rawTotals[cat].usd : 0);
@@ -1596,25 +1515,25 @@ function renderMonthData(monthKey) {
       }
     }
   });
-
+ 
   // Also add any unknown cats not in hierarchy
   Object.entries(rawTotals).forEach(([cat, {type, usd}]) => {
     if (!seen.has(cat)) displayCats.push({ cat, usd, type, isParent: false, isChild: false });
   });
-
+ 
   catBody.innerHTML = displayCats.map(({ cat, usd, type, isParent, isChild }) => {
     const olyaShare = type === 'olya' ? usd : type === 'joint' ? usd/2 : 0;
     const maxShare = type === 'max' ? usd : type === 'joint' ? usd/2 : 0;
-
+ 
     // Row background
     let rowBg = '';
     if (!isChild) rowBg = 'background:var(--surface2);';
-
+ 
     // Cell style
     let cellStyle = '';
     if (isChild) cellStyle = 'padding-left:32px; color:var(--text-2); font-size:13px; font-weight:400;';
     else cellStyle = 'font-weight:600; font-size:14px; color:var(--text);';
-
+ 
     return `<tr style="${rowBg}">
       <td style="${cellStyle}">
         <span style="margin-right:6px">${CAT_ICONS[cat]||'•'}</span>${isChild ? '↳ ' : ''}${cat}
@@ -1626,7 +1545,7 @@ function renderMonthData(monthKey) {
     </tr>`;
   }).join('');
 }
-
+ 
 // ==================== HISTORY ====================
 function renderHistory() {
   const months = Object.keys(appState.months).sort().reverse();
@@ -1653,96 +1572,247 @@ function renderHistory() {
     }).join('')}</tbody>
   </table>`;
 }
-
+ 
 // ==================== GOOGLE ====================
+// ==================== GOOGLE OAUTH + SHEETS ====================
+const GOOGLE_CLIENT_ID = '852556103633-f2fu51g88st35hl3i4e74rgbq3ivbjnv.apps.googleusercontent.com';
+const SHEET_ID = '1xKt0j2hTVnxYT9K9uOw5j0HitVD3BUil3LHCVMDlOGQ';
+const SCOPES = 'https://www.googleapis.com/auth/spreadsheets';
+ 
+let gsiClient = null;
+let accessToken = null;
+ 
+function loadGoogleScript() {
+  return new Promise(resolve => {
+    if (document.getElementById('gsi-script')) { resolve(); return; }
+    const s = document.createElement('script');
+    s.id = 'gsi-script';
+    s.src = 'https://accounts.google.com/gsi/client';
+    s.onload = resolve;
+    document.head.appendChild(s);
+  });
+}
+ 
+async function signIn() {
+  await loadGoogleScript();
+  gsiClient = google.accounts.oauth2.initTokenClient({
+    client_id: GOOGLE_CLIENT_ID,
+    scope: SCOPES,
+    callback: async (resp) => {
+      if (resp.error) {
+        const errEl = document.getElementById('login-error');
+        errEl.textContent = 'Ошибка входа: ' + resp.error;
+        errEl.style.display = 'block';
+        return;
+      }
+      accessToken = resp.access_token;
+      // Get user info
+      try {
+        const userRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: 'Bearer ' + accessToken }
+        });
+        const user = await userRes.json();
+        // Show user in nav
+        document.getElementById('nav-user').style.display = 'flex';
+        document.getElementById('nav-avatar').src = user.picture || '';
+        document.getElementById('nav-name').textContent = user.name || user.email;
+        // Hide login screen
+        document.getElementById('login-screen').style.display = 'none';
+        // Load data from Sheets
+        showToast('Загружаю данные...', '');
+        await loadFromSheets();
+        renderSettingsCategories();
+        renderDashboard();
+        renderHistory();
+        checkSetupStatus();
+        showToast('Добро пожаловать, ' + (user.given_name || user.name) + '!', 'success');
+      } catch(e) {
+        showToast('Ошибка загрузки данных', 'error');
+        document.getElementById('login-screen').style.display = 'none';
+      }
+    }
+  });
+  gsiClient.requestAccessToken();
+}
+ 
+function signOut() {
+  if (accessToken) google.accounts.oauth2.revoke(accessToken);
+  accessToken = null;
+  document.getElementById('nav-user').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+}
+ 
+// ==================== SHEETS READ/WRITE ====================
+const SETTINGS_RANGE = 'Settings!A1:B100';
+const MONTHS_RANGE = 'Months!A1:Z10000';
+ 
+async function sheetsGet(range) {
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(range)}`;
+  const res = await fetch(url, { headers: { Authorization: 'Bearer ' + accessToken } });
+  if (!res.ok) throw new Error('Sheets read error: ' + res.status);
+  return await res.json();
+}
+ 
+async function sheetsUpdate(range, values) {
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(range)}?valueInputOption=RAW`;
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ range, majorDimension: 'ROWS', values })
+  });
+  if (!res.ok) throw new Error('Sheets write error: ' + res.status);
+  return await res.json();
+}
+ 
+async function sheetsClear(range) {
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(range)}:clear`;
+  await fetch(url, { method: 'POST', headers: { Authorization: 'Bearer ' + accessToken } });
+}
+ 
+async function ensureSheets() {
+  // Check if required sheets exist, create if not
+  const metaUrl = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}`;
+  const res = await fetch(metaUrl, { headers: { Authorization: 'Bearer ' + accessToken } });
+  const meta = await res.json();
+  const existingSheets = meta.sheets.map(s => s.properties.title);
+  const needed = ['Settings', 'Months'];
+  const toCreate = needed.filter(n => !existingSheets.includes(n));
+  if (toCreate.length > 0) {
+    const requests = toCreate.map(title => ({ addSheet: { properties: { title } } }));
+    await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}:batchUpdate`, {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ requests })
+    });
+  }
+}
+ 
+async function loadFromSheets() {
+  try {
+    await ensureSheets();
+    // Load settings
+    const settingsData = await sheetsGet(SETTINGS_RANGE);
+    const rows = settingsData.values || [];
+    const settings = {};
+    rows.forEach(([k, v]) => { if (k) settings[k] = v; });
+ 
+    if (settings.rates) {
+      try { appState.rates = JSON.parse(settings.rates); } catch(e) {}
+    }
+    if (settings.categories) {
+      try { appState.categories = JSON.parse(settings.categories); } catch(e) {}
+    }
+ 
+    // Load months
+    const monthsData = await sheetsGet(MONTHS_RANGE);
+    const mRows = monthsData.values || [];
+    if (mRows.length > 1) {
+      appState.months = {};
+      for (let i = 1; i < mRows.length; i++) {
+        const [monthKey, jsonData] = mRows[i];
+        if (monthKey && jsonData) {
+          try { appState.months[monthKey] = JSON.parse(jsonData); } catch(e) {}
+        }
+      }
+    }
+ 
+    // Apply migrations
+    Object.keys(appState.categories).forEach(cat => {
+      if (appState.categories[cat] === 'mine') appState.categories[cat] = DEFAULT_CAT_TYPES[cat] || 'olya';
+    });
+    ALL_CATS_ORDERED.forEach(cat => {
+      if (!appState.categories[cat] && DEFAULT_CAT_TYPES[cat]) appState.categories[cat] = DEFAULT_CAT_TYPES[cat];
+    });
+    ['Макс','Исключённые'].forEach(cat => { delete appState.categories[cat]; });
+ 
+  } catch(e) {
+    console.error('loadFromSheets error:', e);
+    // Fall back to localStorage
+    loadFromStorage();
+  }
+}
+ 
+async function saveToSheets() {
+  if (!accessToken) { saveToStorage(); return; }
+  try {
+    // Save settings
+    const settingsRows = [
+      ['key', 'value'],
+      ['rates', JSON.stringify(appState.rates)],
+      ['categories', JSON.stringify(appState.categories)],
+    ];
+    await sheetsClear(SETTINGS_RANGE);
+    await sheetsUpdate(SETTINGS_RANGE, settingsRows);
+ 
+    // Save months
+    const monthRows = [['monthKey', 'data']];
+    Object.entries(appState.months).forEach(([k, v]) => {
+      monthRows.push([k, JSON.stringify(v)]);
+    });
+    await sheetsClear(MONTHS_RANGE);
+    await sheetsUpdate(MONTHS_RANGE, monthRows);
+  } catch(e) {
+    console.error('saveToSheets error:', e);
+    saveToStorage(); // fallback
+  }
+}
+ 
 function initLocalMode() {
   appState.mode = 'local';
   saveToStorage();
-  showToast('Работаем локально. Данные хранятся в браузере.', 'success');
-  showPage('settings');
+  document.getElementById('login-screen').style.display = 'none';
+  showToast('Работаем локально', 'success');
 }
-
-async function connectGoogle() {
-  const apiKey = document.getElementById('apiKeyInput').value.trim();
-  const sheetId = document.getElementById('sheetIdInput').value.trim();
-  const resultEl = document.getElementById('google-connect-result');
-
-  if (!apiKey || !sheetId) {
-    resultEl.textContent = 'Введи API ключ и ID таблицы';
-    resultEl.style.color = 'var(--red)';
-    return;
-  }
-
-  resultEl.textContent = 'Проверяю подключение...';
-  resultEl.style.color = 'var(--text-2)';
-
-  try {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?key=${apiKey}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('Ошибка: ' + res.status);
-    const data = await res.json();
-    appState.googleApiKey = apiKey;
-    appState.googleSheetId = sheetId;
-    appState.mode = 'google';
-    saveToStorage();
-    resultEl.textContent = '';
-    document.getElementById('google-status-badge').style.display = 'flex';
-    document.getElementById('google-info-card').style.display = 'block';
-    document.getElementById('google-info-body').innerHTML = `
-      <div class="info-row"><span>Таблица</span><span>${data.properties?.title || sheetId}</span></div>
-      <div class="info-row"><span>Режим</span><span>Google Sheets (только чтение)</span></div>
-      <div class="info-row"><span>Данные хранятся</span><span>В браузере + Google Sheets</span></div>
-    `;
-    showToast('Google Таблица подключена!', 'success');
-  } catch(e) {
-    resultEl.textContent = 'Не удалось подключиться. Проверь API ключ и ID таблицы.';
-    resultEl.style.color = 'var(--red)';
-  }
+ 
+// Override saveToStorage to also sync to Sheets when logged in
+function saveToStorage() {
+  localStorage.setItem('budgetApp', JSON.stringify(appState));
+  if (accessToken) saveToSheets();
 }
-
+ 
 // ==================== HELPERS ====================
 function formatMonth(key) {
   const [y, m] = key.split('-');
   const months = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
   return `${months[parseInt(m)-1]} ${y}`;
 }
-
+ 
 function fmt(val) {
   if (!val && val !== 0) return '—';
   return '$' + Math.abs(val).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
-
+ 
 function fmtSigned(val) {
   if (!val && val !== 0) return '—';
   const sign = val >= 0 ? '+' : '−';
   return sign + '$' + Math.abs(val).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
-
+ 
 function showToast(msg, type='') {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.className = 'toast show' + (type ? ' ' + type : '');
   setTimeout(() => { t.className = 'toast'; }, 3500);
 }
-
+ 
 // ==================== SITUATIONAL REVIEW ====================
 function showSituationalReview(monthKey) {
   const mData = appState.months[monthKey];
   if (!mData) return;
   const snap = mData.snapshot || { categories: appState.categories };
   const categories = snap.categories;
-
+ 
   const situTxs = mData.transactions
     .map((tx, i) => ({ tx, i }))
     .filter(({ tx }) => (categories[tx.category] || '') === 'situational' && tx.amount < 0);
-
+ 
   if (situTxs.length === 0) {
     showToast('Нет транзакций для разбора', '');
     return;
   }
-
+ 
   const rates = snap.rates || appState.rates;
-
+ 
   const rows = situTxs.map(({ tx, i }) => {
     const current = (mData.txOverrides && mData.txOverrides[i]) || '';
     const usd = Math.abs(toUSD(tx.amount, tx.currency, rates));
@@ -1760,14 +1830,14 @@ function showSituationalReview(monthKey) {
       </td>
     </tr>`;
   }).join('');
-
+ 
   const modal = document.getElementById('situModal');
   document.getElementById('situModalMonth').textContent = formatMonth(monthKey);
   document.getElementById('situTableBody').innerHTML = rows;
   document.getElementById('situMonthKey').value = monthKey;
   modal.style.display = 'flex';
 }
-
+ 
 function setSitu(monthKey, txIndex, type, btn) {
   if (!appState.months[monthKey].txOverrides) appState.months[monthKey].txOverrides = {};
   appState.months[monthKey].txOverrides[txIndex] = type;
@@ -1783,15 +1853,15 @@ function setSitu(monthKey, txIndex, type, btn) {
   saveToStorage();
   renderDashboard();
 }
-
+ 
 function closeSituModal() {
   document.getElementById('situModal').style.display = 'none';
 }
-
+ 
 // ==================== START ====================
 init();
 </script>
-
+ 
 <!-- SITUATIONAL REVIEW MODAL -->
 <div id="situModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:200; align-items:center; justify-content:center; padding:20px;">
   <div style="background:var(--surface); border-radius:12px; width:100%; max-width:780px; max-height:85vh; display:flex; flex-direction:column; box-shadow:0 8px 32px rgba(0,0,0,0.2);">
@@ -1825,3 +1895,5 @@ init();
 </div>
 </body>
 </html>
+ 
+
