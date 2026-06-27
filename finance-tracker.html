@@ -1764,10 +1764,14 @@ function initLocalMode() {
   showToast('Работаем локально', 'success');
 }
  
-// Override saveToStorage to also sync to Sheets when logged in
+// Debounced Sheets save — waits 2s after last change before writing
+let _sheetsDebounceTimer = null;
 function saveToStorage() {
   localStorage.setItem('budgetApp', JSON.stringify(appState));
-  if (accessToken) saveToSheets();
+  if (accessToken) {
+    clearTimeout(_sheetsDebounceTimer);
+    _sheetsDebounceTimer = setTimeout(() => saveToSheets(), 2000);
+  }
 }
  
 // ==================== HELPERS ====================
@@ -1895,5 +1899,3 @@ init();
 </div>
 </body>
 </html>
- 
-
