@@ -4,38 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Семейный бюджет</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
   :root {
-    --bg: #F7F6F3;
+    --bg: #FFFFFF;
     --surface: #FFFFFF;
-    --surface2: #F0EEE9;
-    --border: #E2DED6;
-    --border-strong: #C8C3B8;
-    --text: #1A1916;
-    --text-2: #5C5A54;
-    --text-3: #9C9A94;
-    --accent: #2D5BE3;
-    --accent-bg: #EEF2FD;
-    --green: #1A7F5A;
-    --green-bg: #E8F5EE;
-    --red: #C0392B;
-    --red-bg: #FDF0EE;
+    --surface2: #FFFFFF;
+    --border: #E2E8F0;
+    --border-strong: #CBD5E1;
+    --text: #0F172A;
+    --text-2: #334155;
+    --text-3: #64748B;
+    --accent: #1D4ED8;
+    --accent-dark: #1D4ED8;
+    --accent-mid: #1E40AF;
+    --accent-bg: #EFF6FF;
+    --accent-light: #BFDBFE;
+    --green: #059669;
+    --green-bg: #ECFDF5;
+    --red: #DC2626;
+    --red-bg: #FEF2F2;
     --amber: #9A6000;
     --amber-bg: #FEF6E4;
-    --radius: 10px;
-    --radius-sm: 6px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --blue-muted: #3B82F6;
+    --header-summary: #1D4ED8;
+    --header-cats: #1D4ED8;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 15px;
+    line-height: 1.6;
     min-height: 100vh;
   }
 
@@ -56,8 +63,9 @@
     font-size: 15px;
     font-weight: 600;
     color: var(--text);
-    margin-right: 32px;
+    margin-right: 0;
     letter-spacing: -0.3px;
+    display: none;
   }
   .nav-logo span { color: var(--accent); }
   .nav-tab {
@@ -65,8 +73,9 @@
     padding: 0 16px;
     border: none;
     background: none;
-    color: var(--text-2);
-    font-size: 14px;
+    color: var(--text-3);
+    font-size: 15px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     cursor: pointer;
     border-bottom: 2px solid transparent;
     transition: all 0.15s;
@@ -90,7 +99,7 @@
   }
 
   /* PAGES */
-  .page { display: none; padding: 28px 24px; max-width: 900px; margin: 0 auto; }
+  .page { display: none; padding: 36px 48px; margin: 0 auto; }
   .page.active { display: block; }
 
   /* CARDS */
@@ -100,9 +109,11 @@
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     margin-bottom: 16px;
+    overflow: hidden;
   }
   .card-header {
-    padding: 16px 20px;
+    padding: 18px 24px;
+    background: #EEF2FF;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
@@ -110,12 +121,12 @@
   }
   .card-title {
     font-size: 13px;
-    font-weight: 600;
-    color: var(--text-2);
+    font-weight: 700;
+    color: #3B5BDB;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
   }
-  .card-body { padding: 20px; }
+  .card-body { padding: 24px; }
 
   /* SETUP BANNER */
   .setup-banner {
@@ -141,15 +152,13 @@
     border-radius: var(--radius-sm);
     font-size: 14px;
     font-weight: 500;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     cursor: pointer;
     border: none;
     transition: all 0.15s;
   }
-  .btn-primary {
-    background: var(--accent);
-    color: white;
-  }
-  .btn-primary:hover { background: #2450C8; }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: var(--accent-dark); }
   .btn-secondary {
     background: var(--surface);
     color: var(--text);
@@ -176,6 +185,7 @@
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-sm);
     font-size: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     color: var(--text);
     background: var(--surface);
     transition: border-color 0.15s;
@@ -185,40 +195,18 @@
   .form-hint { font-size: 12px; color: var(--text-3); margin-top: 4px; }
 
   /* RATES GRID */
-  .rates-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .rate-item {
-    background: var(--surface2);
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
-  }
-  .rate-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 8px;
-  }
-  .rate-input-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .rates-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .rate-item { background: var(--surface2); border-radius: var(--radius-sm); padding: 14px 16px; }
+  .rate-label { font-size: 11px; font-weight: 600; color: var(--blue-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .rate-input-row { display: flex; align-items: center; gap: 8px; }
   .rate-input {
-    width: 90px;
-    padding: 6px 10px;
+    width: 90px; padding: 6px 10px;
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-sm);
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text);
-    background: var(--surface);
-    outline: none;
-    text-align: right;
+    font-size: 15px; font-weight: 500;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text); background: var(--surface);
+    outline: none; text-align: right;
   }
   .rate-input:focus { border-color: var(--accent); }
   .rate-unit { font-size: 13px; color: var(--text-2); }
@@ -226,224 +214,138 @@
   /* CATEGORY TABLE */
   .cat-table { width: 100%; border-collapse: collapse; }
   .cat-table th {
-    text-align: left;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 8px 12px;
+    text-align: left; font-size: 11px; font-weight: 600;
+    color: var(--text-3); text-transform: uppercase;
+    letter-spacing: 0.05em; padding: 8px 12px;
     border-bottom: 1px solid var(--border);
   }
-  .cat-table td {
-    padding: 8px 12px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: middle;
-  }
+  .cat-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
   .cat-table tr:last-child td { border-bottom: none; }
   .cat-table tr:hover td { background: var(--surface2); }
-
-  .cat-name { font-size: 14px; color: var(--text); }
+  .cat-name { font-size: 15px; color: var(--text); }
   .cat-select {
-    padding: 4px 8px;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    color: var(--text);
-    background: var(--surface);
-    cursor: pointer;
-    outline: none;
-    min-width: 160px;
+    padding: 4px 8px; border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm); font-size: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text); background: var(--surface);
+    cursor: pointer; outline: none; min-width: 160px;
   }
   .cat-select:focus { border-color: var(--accent); }
 
   /* TYPE BADGES */
-  .type-badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
-  }
-  .type-mine { background: var(--accent-bg); color: var(--accent); }
-  .type-max { background: #EDF7F2; color: var(--green); }
-  .type-joint { background: var(--amber-bg); color: var(--amber); }
-  .type-income-olya { background: #F0EEF9; color: #5B4BB5; }
-  .type-income-max { background: #FEF0F8; color: #A0409A; }
-  .type-ignore { background: var(--surface2); color: var(--text-3); }
-  .type-situational { background: #F5EEF8; color: #9B59B6; }
+  .type-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .type-mine { background: #FEF2F2; color: #991B1B; }
+  .type-max { background: #FEE2E2; color: #7F1D1D; }
+  .type-joint { background: #FECACA; color: #B91C1C; }
+  .type-income-olya { background: #F0FDF4; color: #166534; }
+  .type-income-max { background: #DCFCE7; color: #14532D; }
+  .type-ignore { background: #F1F5F9; color: #64748B; }
+  .type-situational { background: #FED7AA; color: #9A3412; }
 
   /* UPLOAD ZONE */
   .upload-zone {
     border: 2px dashed var(--border-strong);
     border-radius: var(--radius);
-    padding: 40px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.15s;
+    padding: 40px; text-align: center;
+    cursor: pointer; transition: all 0.15s;
     background: var(--surface);
   }
   .upload-zone:hover, .upload-zone.drag { border-color: var(--accent); background: var(--accent-bg); }
   .upload-icon { font-size: 36px; margin-bottom: 12px; }
-  .upload-text { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
-  .upload-hint { font-size: 13px; color: var(--text-3); }
+  .upload-text { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .upload-hint { font-size: 14px; color: var(--text-3); }
   #fileInput { display: none; }
 
   /* MONTH SELECTOR */
-  .month-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
+  .month-row { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
   .month-chip {
-    padding: 6px 14px;
-    border-radius: 20px;
+    padding: 6px 14px; border-radius: 20px;
     border: 1px solid var(--border-strong);
-    font-size: 13px;
-    cursor: pointer;
-    background: var(--surface);
-    color: var(--text-2);
+    font-size: 14px; cursor: pointer;
+    background: var(--surface); color: var(--text-2);
+    font-family: 'Plus Jakarta Sans', sans-serif;
     transition: all 0.15s;
   }
   .month-chip:hover { border-color: var(--accent); color: var(--accent); }
-  .month-chip.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-    font-weight: 500;
-  }
+  .month-chip.active { background: var(--accent); border-color: var(--accent); color: white; font-weight: 500; }
 
   /* SUMMARY TABLE */
   .summary-table { width: 100%; border-collapse: collapse; }
+  .summary-table thead { background: #EEF2FF; }
   .summary-table th {
-    text-align: right;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 10px 14px;
-    border-bottom: 2px solid var(--border);
+    text-align: right; font-size: 13px; font-weight: 700;
+    color: #3B5BDB; text-transform: uppercase; letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--border); padding: 16px 16px;
   }
   .summary-table th:first-child { text-align: left; }
   .summary-table td {
-    padding: 12px 14px;
-    text-align: right;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
-  }
-  .summary-table td:first-child { text-align: left; font-weight: 500; }
-  .summary-table tr.total-row td {
-    font-weight: 600;
-    font-size: 15px;
-    background: var(--surface2);
-    border-top: 2px solid var(--border);
-    border-bottom: none;
-  }
-  .summary-table tr.total-row td:first-child { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
-  .summary-table tr.total-row td:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
-  .val-pos { color: var(--green); }
-  .val-neg { color: var(--red); }
-
-  /* DEBT BLOCK */
-  .debt-block {
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-  .debt-block.owes-max {
-    background: var(--accent-bg);
-    border: 1px solid #C0D0F8;
-  }
-  .debt-block.owes-olya {
-    background: var(--green-bg);
-    border: 1px solid #A0D8BC;
-  }
-  .debt-block.settled {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-  }
-  .debt-label { font-size: 12px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-  .debt-main { font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-  .debt-sub { font-size: 13px; color: var(--text-2); }
-  .debt-breakdown {
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(0,0,0,0.08);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .debt-row-item {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
+    padding: 18px 16px; text-align: right;
+    border-bottom: 1px solid var(--border); font-size: 16px;
     color: var(--text-2);
   }
+  .summary-table td:first-child { text-align: left; font-weight: 500; color: var(--text); }
+  .summary-table tr.total-row td {
+    font-weight: 700; font-size: 18px;
+    background: #FFFFFF;
+    border-top: 1px solid var(--border);
+    border-bottom: none; color: var(--text);
+  }
+  .val-pos { color: var(--green) !important; font-weight: 600 !important; }
+  .val-neg { color: var(--red) !important; font-weight: 600 !important; }
+
+  /* CATEGORIES BREAKDOWN TABLE */
+  .cat-breakdown-table { width: 100%; border-collapse: collapse; }
+  .cat-breakdown-table thead { background: #EEF2FF; }
+  .cat-breakdown-table th {
+    text-align: right; font-size: 13px; font-weight: 700;
+    color: #3B5BDB; text-transform: uppercase; letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--border); padding: 12px 16px;
+  }
+  .cat-breakdown-table th:first-child { text-align: left; }
+  .cat-breakdown-table th:nth-child(2) { text-align: left; }
+  .cat-breakdown-table td {
+    padding: 10px 16px; text-align: right;
+    border-bottom: 1px solid var(--border); font-size: 15px;
+    color: var(--text-2);
+  }
+  .cat-breakdown-table td:first-child { text-align: left; }
+  .cat-breakdown-table td:nth-child(2) { text-align: left; }
+
+  /* KPI CARDS */
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; box-shadow: var(--shadow); }
+  .kpi-label { font-size: 14px; font-weight: 500; color: var(--text-3); margin-bottom: 6px; }
+  .kpi-value { font-size: 26px; font-weight: 600; color: var(--text); letter-spacing: -0.4px; }
+
+  /* DEBT BLOCK */
+  .debt-block { border-radius: 0; padding: 0; margin-bottom: 0; background: none; border: none; }
+  .debt-label { font-size: 14px; font-weight: 500; color: var(--text-3); margin-bottom: 4px; }
+  .debt-main { font-size: 32px; font-weight: 600; color: var(--text); margin-bottom: 20px; letter-spacing: -0.5px; }
+  .debt-sub { font-size: 13px; color: var(--text-2); }
+  .debt-breakdown { display: flex; flex-direction: column; gap: 0; }
+  .debt-row-item { display: flex; justify-content: space-between; font-size: 15px; color: var(--text-3); padding: 10px 0; border-top: 1px solid var(--border); }
   .debt-row-item span:last-child { font-weight: 500; color: var(--text); }
 
-  /* SAVINGS BLOCK */
-  .savings-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .savings-card {
-    background: var(--green-bg);
-    border: 1px solid #A8D8BC;
-    border-radius: var(--radius);
-    padding: 16px 20px;
-  }
-  .savings-label { font-size: 11px; font-weight: 600; color: #1A7F5A; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-  .savings-value { font-size: 22px; font-weight: 600; color: var(--green); }
-  .savings-sub { font-size: 12px; color: #3A9A6A; margin-top: 3px; }
+  /* SAVINGS */
+  .savings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: center; height: 100%; }
+  .savings-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px; }
+  .savings-label { font-size: 14px; font-weight: 500; color: var(--text-3); margin-bottom: 8px; }
+  .savings-value { font-size: 24px; font-weight: 600; color: var(--text); letter-spacing: -0.4px; }
+  .savings-sub { font-size: 11px; color: var(--text-3); margin-top: 2px; }
 
   /* HISTORY */
   .history-table { width: 100%; border-collapse: collapse; }
-  .history-table th {
-    text-align: left;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
-  }
+  .history-table th { text-align: left; font-size: 13px; font-weight: 700; color: #3B5BDB; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 20px; border-bottom: 1px solid var(--border); background: #EEF2FF; }
   .history-table th:not(:first-child) { text-align: right; }
-  .history-table td {
-    padding: 11px 14px;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
-  }
+  .history-table td { padding: 16px 20px; border-bottom: 1px solid var(--border); font-size: 15px; color: var(--text-2); }
   .history-table td:not(:first-child) { text-align: right; }
   .history-table tr:last-child td { border-bottom: none; }
   .history-table tr:hover td { background: var(--surface2); cursor: pointer; }
 
-  /* GOOGLE SETUP */
+  /* SETUP STEPS */
   .setup-steps { counter-reset: step; }
-  .setup-step {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 20px;
-    align-items: flex-start;
-  }
-  .setup-step-num {
-    width: 28px;
-    height: 28px;
-    background: var(--accent);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 600;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
+  .setup-step { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+  .setup-step-num { width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0; margin-top: 2px; }
   .setup-step-done { background: var(--green); }
   .setup-step-body { flex: 1; }
   .setup-step-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
@@ -451,87 +353,35 @@
   .setup-step-desc a { color: var(--accent); text-decoration: none; }
   .setup-step-desc a:hover { text-decoration: underline; }
   .setup-step-input { margin-top: 10px; }
-  .connected-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--green-bg);
-    color: var(--green);
-    border: 1px solid #A8D8BC;
-    border-radius: 20px;
-    padding: 4px 10px;
-    font-size: 12px;
-    font-weight: 600;
-    margin-top: 8px;
-  }
+  .connected-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-bg); color: var(--green); border: 1px solid #A8D8BC; border-radius: 20px; padding: 4px 10px; font-size: 12px; font-weight: 600; margin-top: 8px; }
 
   /* TAGS */
-  .tag {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 500;
-  }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; }
   .tag-month { background: var(--surface2); color: var(--text-2); }
 
   /* TOAST */
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: var(--text);
-    color: white;
-    padding: 12px 18px;
-    border-radius: var(--radius);
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    z-index: 1000;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: all 0.2s;
-    pointer-events: none;
-    max-width: 320px;
-  }
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--text); color: white; padding: 12px 18px; border-radius: var(--radius); font-size: 14px; font-weight: 500; box-shadow: 0 4px 16px rgba(0,0,0,0.2); z-index: 1000; opacity: 0; transform: translateY(8px); transition: all 0.2s; pointer-events: none; max-width: 320px; }
   .toast.show { opacity: 1; transform: translateY(0); }
   .toast.success { background: var(--green); }
   .toast.error { background: var(--red); }
 
   /* EMPTY STATE */
-  .empty-state {
-    text-align: center;
-    padding: 48px 20px;
-    color: var(--text-3);
-  }
+  .empty-state { text-align: center; padding: 48px 20px; color: var(--text-3); }
   .empty-state-icon { font-size: 40px; margin-bottom: 12px; }
-  .empty-state-title { font-size: 16px; font-weight: 500; color: var(--text-2); margin-bottom: 6px; }
-  .empty-state-desc { font-size: 13px; line-height: 1.6; }
+  .empty-state-title { font-size: 17px; font-weight: 500; color: var(--text-2); margin-bottom: 6px; }
+  .empty-state-desc { font-size: 14px; line-height: 1.6; }
 
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-  }
-  .section-title-lg { font-size: 16px; font-weight: 600; }
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .section-title-lg { font-size: 24px; font-weight: 600; letter-spacing: -0.3px; }
   .divider { height: 1px; background: var(--border); margin: 20px 0; }
-  .text-muted { color: var(--text-3); font-size: 13px; }
+  .text-muted { color: var(--text-3); font-size: 14px; }
   .flex { display: flex; }
   .gap-2 { gap: 8px; }
   .items-center { align-items: center; }
   .justify-between { justify-content: space-between; }
   .mt-2 { margin-top: 8px; }
   .mb-1 { margin-bottom: 4px; }
-  .info-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 0;
-    font-size: 13px;
-    color: var(--text-2);
-    border-bottom: 1px solid var(--border);
-  }
+  .info-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 13px; color: var(--text-2); border-bottom: 1px solid var(--border); }
   .info-row:last-child { border-bottom: none; }
   .info-row span:last-child { font-weight: 500; color: var(--text); }
 </style>
@@ -539,10 +389,10 @@
 <body>
 
 <nav class="nav">
-  <div class="nav-logo">Бюджет <span>✦</span></div>
-  <button class="nav-tab active" onclick="showPage('dashboard')" id="tab-dashboard">📊 Дашборд</button>
-  <button class="nav-tab" onclick="showPage('upload')" id="tab-upload">📥 Загрузка</button>
-  <button class="nav-tab" onclick="showPage('settings')" id="tab-settings">⚙️ Настройки</button>
+  <button class="nav-tab active" onclick="showPage('dashboard')" id="tab-dashboard">Дашборд</button>
+  <button class="nav-tab" onclick="showPage('categories')" id="tab-categories">Траты по категориям</button>
+  <button class="nav-tab" onclick="showPage('upload')" id="tab-upload">Загрузка</button>
+  <button class="nav-tab" onclick="showPage('settings')" id="tab-settings">Настройки</button>
   <div style="flex:1"></div>
   <div id="nav-user" style="display:none; align-items:center; gap:10px; padding: 0 8px;">
     <span id="nav-name" style="font-size:13px; color:var(--text-2);"></span>
@@ -558,7 +408,7 @@
 
   <div id="dashboard-setup-warning" style="display:none">
     <div class="setup-banner">
-      <div class="setup-banner-icon">⚠️</div>
+      <div class="setup-banner-icon">️</div>
       <div class="setup-banner-text">
         <strong>Сначала настрой приложение.</strong> Перейди в раздел <strong>Настройки</strong> — укажи курсы валют и разметь категории. Потом загрузи файл из MoneyLover в разделе <strong>Загрузка</strong>.
       </div>
@@ -567,7 +417,7 @@
 
   <div id="dashboard-empty" style="display:none">
     <div class="empty-state">
-      <div class="empty-state-icon">📂</div>
+      <div class="empty-state-icon"></div>
       <div class="empty-state-title">Данных пока нет</div>
       <div class="empty-state-desc">Перейди в раздел <strong>Загрузка</strong> и загрузи файл из MoneyLover</div>
     </div>
@@ -577,17 +427,21 @@
 
     <!-- Month selector -->
     <div class="section-header">
-      <div class="section-title-lg">Обзор</div>
+      <div class="section-title-lg" id="dashboard-month-heading">Обзор</div>
       <div id="last-updated" class="text-muted"></div>
     </div>
     <div class="month-row" id="monthRow"></div>
 
+    <!-- KPI cards -->
+    <div class="kpi-row" id="kpiRow">
+      <div class="kpi-card"><div class="kpi-label">Доход Оли</div><div class="kpi-value" id="kpi-income-olya">—</div></div>
+      <div class="kpi-card"><div class="kpi-label">Доход Макса</div><div class="kpi-value" id="kpi-income-max">—</div></div>
+      <div class="kpi-card"><div class="kpi-label">Траты Оли</div><div class="kpi-value" id="kpi-spent-olya">—</div></div>
+      <div class="kpi-card"><div class="kpi-label">Траты Макса</div><div class="kpi-value" id="kpi-spent-max">—</div></div>
+    </div>
+
     <!-- Summary table -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Сводка месяца</div>
-        <div id="dashboard-month-label" class="tag tag-month"></div>
-      </div>
+    <div class="card" style="margin-bottom:40px">
       <div class="card-body" style="padding:0">
         <table class="summary-table">
           <thead>
@@ -606,27 +460,27 @@
     </div>
 
     <!-- Debt + Savings row -->
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:40px; align-items:stretch;">
 
       <!-- DEBT -->
-      <div>
-        <div class="card">
+      <div style="display:flex; flex-direction:column;">
+        <div class="card" style="flex:1; display:flex; flex-direction:column;">
           <div class="card-header">
             <div class="card-title">Кто кому должен</div>
           </div>
-          <div class="card-body">
+          <div class="card-body" style="flex:1;">
             <div id="debtBlock"></div>
           </div>
         </div>
       </div>
 
       <!-- SAVINGS -->
-      <div>
-        <div class="card">
+      <div style="display:flex; flex-direction:column;">
+        <div class="card" style="flex:1; display:flex; flex-direction:column;">
           <div class="card-header">
             <div class="card-title">Накопления Оли</div>
           </div>
-          <div class="card-body">
+          <div class="card-body" style="flex:1;">
             <div class="savings-grid" id="savingsBlock"></div>
           </div>
         </div>
@@ -634,27 +488,31 @@
 
     </div>
 
-    <!-- Categories breakdown -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Траты по категориям</div>
-      </div>
-      <div class="card-body" style="padding:0">
-        <table class="summary-table" id="catBreakdownTable">
-          <thead>
-            <tr>
-              <th>Категория</th>
-              <th>Тип</th>
-              <th>Сумма</th>
-              <th>Оля</th>
-              <th>Макс</th>
-            </tr>
-          </thead>
-          <tbody id="catBreakdownBody"></tbody>
-        </table>
-      </div>
-    </div>
+  </div>
+</div>
 
+<!-- ==================== CATEGORIES PAGE ==================== -->
+<div class="page" id="page-categories">
+  <div class="section-header" style="margin-bottom:16px">
+    <div class="section-title-lg" id="categories-month-heading">Траты по категориям</div>
+    <div id="categories-month-label" class="text-muted"></div>
+  </div>
+  <div class="month-row" id="catMonthRow"></div>
+  <div class="card">
+    <div class="card-body" style="padding:0">
+      <table class="cat-breakdown-table" id="catBreakdownTable">
+        <thead>
+          <tr>
+            <th>Категория</th>
+            <th style="text-align:left">Тип</th>
+            <th>Сумма</th>
+            <th>Оля</th>
+            <th>Макс</th>
+          </tr>
+        </thead>
+        <tbody id="catBreakdownBody"></tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -662,13 +520,13 @@
 <div class="page" id="page-upload">
   <div class="section-header" style="margin-bottom:20px">
     <div class="section-title-lg">Загрузка данных</div>
-    <button class="btn btn-secondary" onclick="forceSyncToSheets()" id="sync-btn">☁️ Синхронизировать</button>
+    <button class="btn btn-secondary" onclick="forceSyncToSheets()" id="sync-btn">Синхронизировать</button>
   </div>
 
   <div class="card">
     <div class="card-body">
       <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
-        <div class="upload-icon">📄</div>
+        <div class="upload-icon"></div>
         <div class="upload-text">Загрузи файл из MoneyLover</div>
         <div class="upload-hint">Формат .xlsx · Нажми или перетащи файл сюда</div>
       </div>
@@ -685,16 +543,18 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">История загрузок</div>
+  <div style="margin-top:8px">
+    <div class="section-header" style="margin-bottom:12px">
+      <div class="section-title-lg">История загрузок</div>
     </div>
+    <div class="card" style="margin-bottom:0">
     <div id="historyBlock">
       <div class="empty-state" style="padding:28px">
-        <div class="empty-state-icon">🗂</div>
+        <div class="empty-state-icon"></div>
         <div class="empty-state-title">Загрузок пока нет</div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 
@@ -735,20 +595,24 @@
   </div>
 
   <!-- Categories -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">Разметка категорий</div>
+  <div style="margin-top:8px">
+    <div class="section-header" style="margin-bottom:16px">
+      <div class="section-title-lg">Разметка категорий</div>
       <div class="text-muted" id="cat-count-label"></div>
     </div>
-    <div class="card-body" style="padding:0">
+    <div class="card" style="margin-bottom:0">
       <div id="categoriesEmpty" style="display:none">
         <div class="empty-state" style="padding:28px">
-          <div class="empty-state-icon">🏷</div>
+          <div class="empty-state-icon"></div>
           <div class="empty-state-title">Категории появятся после первой загрузки файла</div>
           <div class="empty-state-desc">Загрузи файл из MoneyLover — категории подтянутся автоматически</div>
         </div>
       </div>
       <div id="categoriesTable" style="display:none">
+        <div style="display:flex; border-bottom:1px solid var(--border); padding:0 0 0 0;">
+          <button id="tab-expenses" onclick="switchCatTab('expenses')" style="padding:14px 24px; font-size:15px; font-weight:500; color:#1D4ED8; border:none; background:none; cursor:pointer; border-bottom:2px solid #1D4ED8; margin-bottom:-1px; font-family:'Plus Jakarta Sans',sans-serif;">Расходы</button>
+          <button id="tab-income" onclick="switchCatTab('income')" style="padding:14px 24px; font-size:15px; font-weight:500; color:#94A3B8; border:none; background:none; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; font-family:'Plus Jakarta Sans',sans-serif;">Доходы</button>
+        </div>
         <table class="cat-table">
           <thead>
             <tr>
@@ -766,7 +630,7 @@
 <!-- ==================== LOGIN SCREEN ==================== -->
 <div id="login-screen" style="display:none; position:fixed; inset:0; background:var(--bg); z-index:500; align-items:center; justify-content:center;">
   <div style="text-align:center; padding:40px; max-width:360px; width:100%;">
-    <div style="font-size:48px; margin-bottom:16px;">💰</div>
+    <div style="font-size:48px; margin-bottom:16px;"></div>
     <div style="font-size:24px; font-weight:600; margin-bottom:8px; color:var(--text);">Семейный бюджет</div>
     <div style="font-size:14px; color:var(--text-2); margin-bottom:28px;">Введи свой email чтобы войти</div>
     <input id="login-email" type="email" class="form-input" placeholder="твой@email.com" style="margin-bottom:12px; text-align:center; font-size:15px;"
@@ -890,27 +754,27 @@ const DEFAULT_CAT_TYPES = {
 
 // Icons for each category
 const CAT_ICONS = {
-  'Счета и коммунальные услуги':'🧾','Электричество':'⚡','Интернет':'🌐','Коммуналка':'🏠','Мобильный телефон':'📱',
-  'Транспорт':'🚗','Такси':'🚕','Заправка':'⛽','Обслуживание транспорта':'🔧','Общественный транспорт':'🚌',
-  'Покупки':'🛍','Аксессуары':'💎','Одежда':'👕','Обувь':'👟',
-  'Здоровье':'🏥','Врач':'👩‍⚕️','Аптека':'💊','Спорт':'🏃‍♀️','Медитация':'🧘‍♀️',
-  'Развлечения':'🎮','Игры Оля':'🎲','Квесты':'🃏','Фильмы/ Театры/ Концерты':'🎬',
-  'Прочие расходы':'📦',
-  'Путешествия':'✈️','Проживание':'🏨','Парковка':'🅿️','Еда в поездке':'🍽','Билеты':'🎫','Проезд':'🚆','Прочее в поездке':'🧳','Визы':'🛂','Сувениры':'🪆','Покупки в путешествиях':'🎁',
-  'Еда':'🍴','Доставка еды':'🛵','Кафе и рестораны':'🍝','Кофе и вкусняхи':'☕','Продукты домой':'🛒',
-  'Командировка':'💼',
-  'Кот':'🐱','Питание':'🍖','Ветеринар, анализы, уколы':'🩺','Игрушки, лежанки':'🧸','Лекарства':'💉','Наполнитель':'🪣',
-  'Красота':'🌸','Брови и Ресницы':'🪮','Косметика':'🧴','Косметолог':'🧖‍♀️','Маникюр':'💅','Парикмахерская':'✂️','Педикюр':'🦶','Спа':'🛁','Коррекция тела':'🩱',
-  'Домашние расходы':'🏡','Бытовые покупки и вещи в дом':'🧹','Уборка':'🫧','Цветы':'🌿',
-  'Подарки и Пожертвования':'🤝','Общие Подарки и Пожертвования':'🎀','Мои Подарки и Пожертвования':'💝',
-  'Подписки':'📺',
-  'Развитие':'📚','Книги':'📖','Курсы и вебинары':'🎓','Психолог':'🧠',
-  'Траты Макса':'🐯','Барбершоп':'💈','Штрафы':'🚦','Игры Макс':'🕹','Кальян':'💨',
-  'Электроника':'💻',
-  'В долг Максу':'🤝',
-  'Исключённые Расходы':'🚫','Сняла наличные':'💵','Перевод Максу':'↔️',
-  'Зарплата':'💰','Прочие поступления':'📥','Подарки':'🎁','Командировочные':'🗂','Доход Макса':'👤',
-  'Исключённые Доходы':'🚫','Перевод Плюс':'➕','Наличные Плюс':'💵',
+  'Счета и коммунальные услуги':'','Электричество':'','Интернет':'','Коммуналка':'','Мобильный телефон':'',
+  'Транспорт':'','Такси':'','Заправка':'','Обслуживание транспорта':'','Общественный транспорт':'',
+  'Покупки':'','Аксессуары':'','Одежда':'','Обувь':'',
+  'Здоровье':'','Врач':'‍️','Аптека':'','Спорт':'‍️','Медитация':'‍️',
+  'Развлечения':'','Игры Оля':'','Квесты':'','Фильмы/ Театры/ Концерты':'',
+  'Прочие расходы':'',
+  'Путешествия':'️','Проживание':'','Парковка':'','Еда в поездке':'','Билеты':'','Проезд':'','Прочее в поездке':'','Визы':'','Сувениры':'','Покупки в путешествиях':'',
+  'Еда':'','Доставка еды':'','Кафе и рестораны':'','Кофе и вкусняхи':'','Продукты домой':'',
+  'Командировка':'',
+  'Кот':'','Питание':'','Ветеринар, анализы, уколы':'','Игрушки, лежанки':'','Лекарства':'','Наполнитель':'',
+  'Красота':'','Брови и Ресницы':'','Косметика':'','Косметолог':'‍️','Маникюр':'','Парикмахерская':'️','Педикюр':'','Спа':'','Коррекция тела':'',
+  'Домашние расходы':'','Бытовые покупки и вещи в дом':'','Уборка':'','Цветы':'',
+  'Подарки и Пожертвования':'','Общие Подарки и Пожертвования':'','Мои Подарки и Пожертвования':'',
+  'Подписки':'',
+  'Развитие':'','Книги':'','Курсы и вебинары':'','Психолог':'',
+  'Траты Макса':'','Барбершоп':'','Штрафы':'','Игры Макс':'','Кальян':'',
+  'Электроника':'',
+  'В долг Максу':'',
+  'Исключённые Расходы':'','Сняла наличные':'','Перевод Максу':'',
+  'Зарплата':'','Прочие поступления':'','Подарки':'','Командировочные':'','Доход Макса':'',
+  'Исключённые Доходы':'','Перевод Плюс':'','Наличные Плюс':'',
 };
 
 function getEffectiveType(catName, categories) {
@@ -977,8 +841,8 @@ function checkSetupStatus() {
   const setupDone = hasRates;
   document.getElementById('dashboard-setup-warning').style.display = (!setupDone) ? 'block' : 'none';
   const settingsTab = document.getElementById('tab-settings');
-  if (!setupDone) settingsTab.innerHTML = '⚙️ Настройки <span class="badge">!</span>';
-  else settingsTab.innerHTML = '⚙️ Настройки';
+  if (!setupDone) settingsTab.innerHTML = '️ Настройки <span class="badge">!</span>';
+  else settingsTab.innerHTML = '️ Настройки';
 }
 
 // ==================== NAVIGATION ====================
@@ -988,6 +852,7 @@ function showPage(name) {
   document.getElementById('page-' + name).classList.add('active');
   document.getElementById('tab-' + name).classList.add('active');
   if (name === 'dashboard') renderDashboard();
+  if (name === 'categories') renderCategoriesPage();
   if (name === 'settings') renderSettingsCategories();
 }
 
@@ -1020,9 +885,24 @@ function saveSettings() {
     appState.categories[sel.dataset.cat] = sel.value;
   });
   saveToStorage();
-  showToast('Настройки сохранены ✓', 'success');
+  showToast('Настройки сохранены ', 'success');
   checkSetupStatus();
   // NOTE: we do NOT recalculate existing months — their snapshots are preserved
+}
+
+let currentCatTab = 'expenses';
+
+function switchCatTab(tab) {
+  currentCatTab = tab;
+  const expBtn = document.getElementById('tab-expenses');
+  const incBtn = document.getElementById('tab-income');
+  if (expBtn && incBtn) {
+    expBtn.style.color = tab === 'expenses' ? '#1D4ED8' : '#94A3B8';
+    expBtn.style.borderBottomColor = tab === 'expenses' ? '#1D4ED8' : 'transparent';
+    incBtn.style.color = tab === 'income' ? '#1D4ED8' : '#94A3B8';
+    incBtn.style.borderBottomColor = tab === 'income' ? '#1D4ED8' : 'transparent';
+  }
+  renderSettingsCategories();
 }
 
 function renderSettingsCategories() {
@@ -1050,34 +930,32 @@ function renderSettingsCategories() {
   const INCOME_PARENT_CATS = new Set(['Зарплата','Прочие поступления','Подарки','Командировочные','Доход Макса','Исключённые Доходы']);
   const INCOME_CATS = new Set([...INCOME_PARENT_CATS, 'Перевод Плюс','Наличные Плюс']);
 
-  body.innerHTML = allCats.map(cat => {
+  // Filter by active tab
+  const filteredCats = allCats.filter(cat => {
+    const isIncome = INCOME_CATS.has(cat);
+    return currentCatTab === 'income' ? isIncome : !isIncome;
+  });
+
+  body.innerHTML = filteredCats.map(cat => {
     const isChild = !!CAT_PARENT[cat];
     const val = appState.categories[cat] || DEFAULT_CAT_TYPES[cat] || '';
     const isParent = !!CAT_HIERARCHY[cat];
     const isIncome = INCOME_CATS.has(cat);
-    const isIncomeParent = isIncome && isParent;
-    const isIncomeChild = isIncome && isChild;
-
-    const sectionHeader = cat === 'Зарплата'
-      ? `<tr><td colspan="2" style="padding:12px 20px 8px; font-size:11px; font-weight:700; color:#1A1916; text-transform:uppercase; letter-spacing:0.05em; background:#C9BFF0; border-top:2px solid var(--border-strong);">Доходы</td></tr>`
-      : '';
 
     // Row background
     let rowBg = '';
-    if (isIncomeParent) rowBg = 'background:#EDE9F8;';
-    else if (isIncome && !isChild) rowBg = 'background:#EDE9F8;'; // standalone income cats too
-    else if (!isChild) rowBg = 'background:var(--surface2);'; // all non-children get grey
+    if (isIncome && !isChild) rowBg = 'background:#EEF2FF;';
+    else if (!isChild) rowBg = 'background:#EEF2FF;';
 
     // Cell text style
     let cellStyle = '';
-    if (isChild && !isIncome) cellStyle = 'padding-left:32px; color:var(--text-2); font-weight:400;';
-    else if (isChild && isIncome) cellStyle = 'padding-left:32px; color:var(--text); font-weight:400;';
-    else cellStyle = 'font-weight:600; color:var(--text);'; // all non-children: bold black
+    if (isChild) cellStyle = 'padding-left:32px; color:var(--text-2); font-weight:400;';
+    else cellStyle = 'font-weight:600; color:var(--text);';
 
-    const icon = CAT_ICONS[cat] || '•';
-    return sectionHeader + `<tr style="${rowBg}">
+    const icon = CAT_ICONS[cat] || '';
+    return `<tr style="${rowBg}">
       <td class="cat-name" style="${cellStyle}">
-        <span style="margin-right:8px; font-size:15px">${icon}</span>${isChild ? '↳ ' : ''}${cat}
+        ${icon ? `<span style="margin-right:8px; font-size:15px">${icon}</span>` : ''}${isChild ? '↳ ' : ''}${cat}
       </td>
       <td>
         <select class="cat-select" data-cat="${cat}" onchange="onCatChange(this)">
@@ -1247,7 +1125,7 @@ function parseAndStore(data, filename) {
     <div class="info-row"><span>Файл</span><span>${filename}</span></div>
     <div class="info-row"><span>Транзакций загружено</span><span>${transactions.length}</span></div>
     <div class="info-row"><span>Месяцы в файле</span><span>${monthsList.map(formatMonth).join(', ')}</span></div>
-    <div class="info-row"><span>Новых категорий</span><span>${newCatCount > 0 ? `<span style="color:var(--amber)">${newCatCount} — нужна разметка</span>` : 'все размечены ✓'}</span></div>
+    <div class="info-row"><span>Новых категорий</span><span>${newCatCount > 0 ? `<span style="color:var(--amber)">${newCatCount} — нужна разметка</span>` : 'все размечены '}</span></div>
     ${situationalCount > 0 ? `<div class="info-row"><span>Требуют решения</span><span style="color:#9B59B6">${situationalCount} транзакций «Зависит от обстоятельств»</span></div>` : ''}
     ${newCatCount > 0 ? `<div style="margin-top:12px"><button class="btn btn-primary btn-sm" onclick="showPage('settings')">Разметить категории →</button></div>` : ''}
     ${situationalCount > 0 ? `<div style="margin-top:8px"><button class="btn btn-sm" style="background:#9B59B6;color:white;border:none;" onclick="showSituationalReview('${monthsList[monthsList.length-1]}')">Разобрать транзакции →</button></div>` : ''}
@@ -1411,10 +1289,16 @@ function renderMonthData(monthKey) {
   const calc = calcMonth(monthKey);
   if (!calc) return;
 
-  document.getElementById('dashboard-month-label').textContent = formatMonth(monthKey);
+  document.getElementById('dashboard-month-heading').textContent = formatMonth(monthKey);
   const snapRates = calc.snapshot?.rates;
-  const ratesInfo = snapRates ? `1 USD = ${snapRates.BYN} BYN · 1 EUR = ${snapRates.EUR} USD` : '';
-  document.getElementById('last-updated').textContent = `Обновлено: ${calc.loadedAt}${ratesInfo ? ' · Курс: ' + ratesInfo : ''}`;
+  const ratesInfo = snapRates ? `Курс: 1 USD = ${snapRates.BYN} BYN · 1 EUR = ${snapRates.EUR} USD` : '';
+  document.getElementById('last-updated').textContent = `Обновлено: ${calc.loadedAt}${ratesInfo ? ' · ' + ratesInfo : ''}`;
+
+  // KPI cards
+  document.getElementById('kpi-income-olya').textContent = fmt(calc.incomeOlya);
+  document.getElementById('kpi-income-max').textContent = fmt(calc.incomeMax);
+  document.getElementById('kpi-spent-olya').textContent = fmt(calc.olyaTotal);
+  document.getElementById('kpi-spent-max').textContent = fmt(calc.maxTotal);
 
   // Summary table
   const body = document.getElementById('summaryTableBody');
@@ -1424,22 +1308,22 @@ function renderMonthData(monthKey) {
       <td>${fmt(calc.jointEach)}</td>
       <td>${fmt(calc.max)}</td>
       <td>${fmt(calc.maxTotal)}</td>
-      <td class="val-pos">${fmt(calc.incomeMax)}</td>
-      <td class="${calc.maxBalance >= 0 ? 'val-pos' : 'val-neg'}">${fmtSigned(calc.maxBalance)}</td>
+      <td>${fmt(calc.incomeMax)}</td>
+      <td>${fmtSigned(calc.maxBalance)}</td>
     </tr>
     <tr>
       <td>Оля</td>
       <td>${fmt(calc.jointEach)}</td>
       <td>${fmt(calc.mine)}</td>
       <td>${fmt(calc.olyaTotal)}</td>
-      <td class="val-pos">${fmt(calc.incomeOlya)}</td>
-      <td class="${calc.olyaBalance >= 0 ? 'val-pos' : 'val-neg'}">${fmtSigned(calc.olyaBalance)}</td>
+      <td>${fmt(calc.incomeOlya)}</td>
+      <td>${fmtSigned(calc.olyaBalance)}</td>
     </tr>
     <tr class="total-row">
       <td>Итого</td>
-      <td>${fmt(calc.joint)}</td>
-      <td>${fmt(calc.mine + calc.max)}</td>
-      <td>${fmt(calc.joint + calc.mine + calc.max)}</td>
+      <td class="val-neg">${fmt(calc.joint)}</td>
+      <td class="val-neg">${fmt(calc.mine + calc.max)}</td>
+      <td class="val-neg">${fmt(calc.joint + calc.mine + calc.max)}</td>
       <td class="val-pos">${fmt(calc.incomeOlya + calc.incomeMax)}</td>
       <td class="${(calc.olyaBalance+calc.maxBalance) >= 0 ? 'val-pos' : 'val-neg'}">${fmtSigned(calc.olyaBalance + calc.maxBalance)}</td>
     </tr>
@@ -1449,22 +1333,19 @@ function renderMonthData(monthKey) {
   const debtEl = document.getElementById('debtBlock');
   const totalDebt = calc.totalDebt;
   const absDebt = Math.abs(totalDebt);
-  let debtClass = 'settled', debtText = '', debtWho = '';
+  let debtWho = '', debtText = '';
   if (absDebt < 0.5) {
-    debtClass = 'settled';
-    debtText = 'Все в расчёте';
     debtWho = 'Долгов нет';
+    debtText = 'Все в расчёте';
   } else if (totalDebt > 0) {
-    debtClass = 'owes-max';
-    debtWho = `Макс должен Оле`;
+    debtWho = 'Макс должен Оле';
     debtText = `$${absDebt.toFixed(2)}`;
   } else {
-    debtClass = 'owes-olya';
-    debtWho = `Оля должна Максу`;
+    debtWho = 'Оля должна Максу';
     debtText = `$${absDebt.toFixed(2)}`;
   }
   debtEl.innerHTML = `
-    <div class="debt-block ${debtClass}">
+    <div class="debt-block">
       <div class="debt-label">${debtWho}</div>
       <div class="debt-main">${debtText}</div>
       <div class="debt-breakdown">
@@ -1485,76 +1366,16 @@ function renderMonthData(monthKey) {
   document.getElementById('savingsBlock').innerHTML = `
     <div class="savings-card">
       <div class="savings-label">Этот месяц</div>
-      <div class="savings-value">${fmtSigned(calc.olyaSavingsThisMonth)}</div>
+      <div class="savings-value" style="color:${calc.olyaSavingsThisMonth >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtSigned(calc.olyaSavingsThisMonth)}</div>
       <div class="savings-sub">доход − все траты Оли</div>
     </div>
     <div class="savings-card">
       <div class="savings-label">Итого 2026</div>
-      <div class="savings-value">${fmtSigned(savingsYTD)}</div>
+      <div class="savings-value" style="color:${savingsYTD >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtSigned(savingsYTD)}</div>
       <div class="savings-sub">нарастающим итогом</div>
     </div>
   `;
 
-  // Categories breakdown — with hierarchy: parents show sum of self + children
-  const catBody = document.getElementById('catBreakdownBody');
-  const rawTotals = calc.catTotals; // { cat: { type, usd } }
-
-  // Build display list in hierarchy order
-  const displayCats = [];
-  const seen = new Set();
-
-  // Process in hierarchy order
-  ALL_CATS_ORDERED.forEach(cat => {
-    if (!rawTotals[cat] && !getChildren(cat).some(c => rawTotals[c])) return; // skip if no data
-    seen.add(cat);
-    const isParent = !!CAT_HIERARCHY[cat];
-    const isChild = !!CAT_PARENT[cat];
-
-    if (isParent) {
-      // Sum self + all children
-      let parentUsd = (rawTotals[cat] ? rawTotals[cat].usd : 0);
-      getChildren(cat).forEach(child => {
-        if (rawTotals[child]) parentUsd += rawTotals[child].usd;
-      });
-      const snap = calc.snapshot || { categories: appState.categories };
-      const type = getEffectiveType(cat, snap.categories);
-      displayCats.push({ cat, usd: parentUsd, type, isParent: true, isChild: false });
-    } else {
-      const entry = rawTotals[cat];
-      if (entry) {
-        displayCats.push({ cat, usd: entry.usd, type: entry.type, isParent: false, isChild });
-      }
-    }
-  });
-
-  // Also add any unknown cats not in hierarchy
-  Object.entries(rawTotals).forEach(([cat, {type, usd}]) => {
-    if (!seen.has(cat)) displayCats.push({ cat, usd, type, isParent: false, isChild: false });
-  });
-
-  catBody.innerHTML = displayCats.map(({ cat, usd, type, isParent, isChild }) => {
-    const olyaShare = type === 'olya' ? usd : type === 'joint' ? usd/2 : 0;
-    const maxShare = type === 'max' ? usd : type === 'joint' ? usd/2 : 0;
-
-    // Row background
-    let rowBg = '';
-    if (!isChild) rowBg = 'background:var(--surface2);';
-
-    // Cell style
-    let cellStyle = '';
-    if (isChild) cellStyle = 'padding-left:32px; color:var(--text-2); font-size:13px; font-weight:400;';
-    else cellStyle = 'font-weight:600; font-size:14px; color:var(--text);';
-
-    return `<tr style="${rowBg}">
-      <td style="${cellStyle}">
-        <span style="margin-right:6px">${CAT_ICONS[cat]||'•'}</span>${isChild ? '↳ ' : ''}${cat}
-      </td>
-      <td><span class="type-badge ${TYPE_CLASSES[type]||''}">${TYPE_LABELS[type]||type}</span></td>
-      <td>${fmt(usd)}</td>
-      <td>${olyaShare > 0 ? fmt(olyaShare) : '—'}</td>
-      <td>${maxShare > 0 ? fmt(maxShare) : '—'}</td>
-    </tr>`;
-  }).join('');
 }
 
 // ==================== HISTORY ====================
@@ -1562,7 +1383,7 @@ function renderHistory() {
   const months = Object.keys(appState.months).sort().reverse();
   const el = document.getElementById('historyBlock');
   if (months.length === 0) {
-    el.innerHTML = `<div class="empty-state" style="padding:28px"><div class="empty-state-icon">🗂</div><div class="empty-state-title">Загрузок пока нет</div></div>`;
+    el.innerHTML = `<div class="empty-state" style="padding:28px"><div class="empty-state-icon"></div><div class="empty-state-title">Загрузок пока нет</div></div>`;
     return;
   }
   el.innerHTML = `<table class="history-table">
@@ -1574,11 +1395,11 @@ function renderHistory() {
     </tr></thead>
     <tbody>${months.map(m => {
       const d = appState.months[m];
-      return `<tr onclick="showPage('dashboard'); selectMonth('${m}')">
+      return `<tr onclick="showPage('dashboard'); selectMonth('${m}')" style="cursor:pointer">
         <td><strong>${formatMonth(m)}</strong></td>
         <td>${d.transactions.length}</td>
-        <td style="color:var(--text-3); font-size:12px">${d.filename || '—'}</td>
-        <td style="color:var(--text-3); font-size:12px">${d.loadedAt}</td>
+        <td style="color:var(--text-3)">${d.filename || '—'}</td>
+        <td style="color:var(--text-3)">${d.loadedAt}</td>
       </tr>`;
     }).join('')}</tbody>
   </table>`;
@@ -1745,12 +1566,12 @@ async function forceSyncToSheets() {
       }
     });
     await saveToSheets();
-    showToast('Данные синхронизированы ✓', 'success');
+    showToast('Данные синхронизированы ', 'success');
   } catch(e) {
     showToast('Ошибка синхронизации', 'error');
     console.error(e);
   }
-  btn.textContent = '☁️ Синхронизировать';
+  btn.textContent = 'Синхронизировать';
   btn.disabled = false;
 }
 
@@ -1767,7 +1588,7 @@ function saveToStorage() {
 // ==================== HELPERS ====================
 function formatMonth(key) {
   const [y, m] = key.split('-');
-  const months = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
+  const months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
   return `${months[parseInt(m)-1]} ${y}`;
 }
 
@@ -1789,7 +1610,71 @@ function showToast(msg, type='') {
   setTimeout(() => { t.className = 'toast'; }, 3500);
 }
 
-// ==================== SITUATIONAL REVIEW ====================
+function renderCategoriesPage() {
+  const months = Object.keys(appState.months).sort();
+  if (!months.length) return;
+  if (!appState.currentMonth || !appState.months[appState.currentMonth]) {
+    appState.currentMonth = months[months.length - 1];
+  }
+  // Month chips
+  const catMonthRow = document.getElementById('catMonthRow');
+  if (catMonthRow) {
+    catMonthRow.innerHTML = months.map(m => `
+      <button class="month-chip ${m === appState.currentMonth ? 'active' : ''}"
+        onclick="appState.currentMonth='${m}'; renderCategoriesPage(); document.querySelectorAll('#catMonthRow .month-chip').forEach(c=>c.classList.toggle('active',c.textContent.trim()===formatMonth('${m}')))">
+        ${formatMonth(m)}
+      </button>
+    `).join('');
+  }
+  document.getElementById('categories-month-heading').textContent = `Траты по категориям · ${formatMonth(appState.currentMonth)}`;
+  renderCatBreakdown(appState.currentMonth);
+}
+
+function renderCatBreakdown(monthKey) {
+  const calc = calcMonth(monthKey);
+  if (!calc) return;
+  const catBody = document.getElementById('catBreakdownBody');
+  const rawTotals = calc.catTotals;
+  const displayCats = [];
+  const seen = new Set();
+
+  ALL_CATS_ORDERED.forEach(cat => {
+    if (!rawTotals[cat] && !getChildren(cat).some(c => rawTotals[c])) return;
+    seen.add(cat);
+    const isParent = !!CAT_HIERARCHY[cat];
+    const isChild = !!CAT_PARENT[cat];
+    if (isParent) {
+      let parentUsd = (rawTotals[cat] ? rawTotals[cat].usd : 0);
+      getChildren(cat).forEach(child => { if (rawTotals[child]) parentUsd += rawTotals[child].usd; });
+      const snap = calc.snapshot || { categories: appState.categories };
+      const type = getEffectiveType(cat, snap.categories);
+      displayCats.push({ cat, usd: parentUsd, type, isParent: true, isChild: false });
+    } else {
+      const entry = rawTotals[cat];
+      if (entry) displayCats.push({ cat, usd: entry.usd, type: entry.type, isParent: false, isChild });
+    }
+  });
+  Object.entries(rawTotals).forEach(([cat, {type, usd}]) => {
+    if (!seen.has(cat)) displayCats.push({ cat, usd, type, isParent: false, isChild: false });
+  });
+
+  catBody.innerHTML = displayCats.map(({ cat, usd, type, isParent, isChild }) => {
+    const olyaShare = type === 'olya' ? usd : type === 'joint' ? usd/2 : 0;
+    const maxShare = type === 'max' ? usd : type === 'joint' ? usd/2 : 0;
+    let rowBg = '';
+    if (!isChild) rowBg = 'background:#EEF2FF;';
+    let cellStyle = '';
+    if (isChild) cellStyle = 'padding-left:32px; color:var(--text-2); font-size:13px; font-weight:400;';
+    else cellStyle = 'font-weight:600; font-size:14px; color:var(--text);';
+    return `<tr style="${rowBg}">
+      <td style="${cellStyle}">${isChild ? '↳ ' : ''}${cat}</td>
+      <td><span class="type-badge ${TYPE_CLASSES[type]||''}">${TYPE_LABELS[type]||type}</span></td>
+      <td>${fmt(usd)}</td>
+      <td>${olyaShare > 0 ? fmt(olyaShare) : '—'}</td>
+      <td>${maxShare > 0 ? fmt(maxShare) : '—'}</td>
+    </tr>`;
+  }).join('');
+}
 function showSituationalReview(monthKey) {
   const mData = appState.months[monthKey];
   if (!mData) return;
@@ -1864,7 +1749,7 @@ init();
         <div style="font-size:16px; font-weight:600;">Разбор транзакций</div>
         <div style="font-size:13px; color:var(--text-3); margin-top:2px">Категория «Зависит от обстоятельств» · <span id="situModalMonth"></span></div>
       </div>
-      <button onclick="closeSituModal()" style="border:none; background:none; font-size:20px; cursor:pointer; color:var(--text-3); padding:4px 8px;">✕</button>
+      <button onclick="closeSituModal()" style="border:none; background:none; font-size:20px; cursor:pointer; color:var(--text-3); padding:4px 8px;"></button>
     </div>
     <div style="overflow-y:auto; flex:1;">
       <table style="width:100%; border-collapse:collapse;">
