@@ -459,22 +459,22 @@
       </div>
     </div>
 
-    <!-- Debt + Savings row -->
+    <!-- Savings row -->
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:40px; align-items:stretch;">
 
-      <!-- DEBT -->
+      <!-- MAX SAVINGS -->
       <div style="display:flex; flex-direction:column;">
         <div class="card" style="flex:1; display:flex; flex-direction:column;">
           <div class="card-header">
-            <div class="card-title">Кто кому должен</div>
+            <div class="card-title">Накопления Макса</div>
           </div>
           <div class="card-body" style="flex:1;">
-            <div id="debtBlock"></div>
+            <div class="savings-grid" id="maxSavingsBlock"></div>
           </div>
         </div>
       </div>
 
-      <!-- SAVINGS -->
+      <!-- OLYA SAVINGS -->
       <div style="display:flex; flex-direction:column;">
         <div class="card" style="flex:1; display:flex; flex-direction:column;">
           <div class="card-header">
@@ -594,6 +594,32 @@
     </div>
   </div>
 
+  <!-- Starting savings -->
+  <div class="card" style="margin-top:8px">
+    <div class="card-header">
+      <div class="card-title">Стартовые накопления</div>
+    </div>
+    <div class="card-body">
+      <div class="form-hint" style="margin-bottom:12px">Накопления на конец месяца перед первым месяцем, который отслеживается в приложении. Прибавляются к нарастающему итогу.</div>
+      <div class="rates-grid">
+        <div class="rate-item">
+          <div class="rate-label">Оля</div>
+          <div class="rate-input-row">
+            <span class="rate-unit">$</span>
+            <input type="number" class="rate-input" id="start-savings-olya" step="0.01" placeholder="0">
+          </div>
+        </div>
+        <div class="rate-item">
+          <div class="rate-label">Макс</div>
+          <div class="rate-input-row">
+            <span class="rate-unit">$</span>
+            <input type="number" class="rate-input" id="start-savings-max" step="0.01" placeholder="0">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Categories -->
   <div style="margin-top:8px">
     <div class="section-header" style="margin-bottom:16px">
@@ -648,7 +674,10 @@ let appState = {
   rates: { BYN: 3.27, EUR: 1.08 },
   categories: {}, // { catName: 'olya'|'max'|'joint'|'situational'|'income-olya'|'income-max'|'ignore' }
   months: {},     // { '2026-06': { transactions: [], loadedAt: '', txOverrides: {} } }
+                  // or, for historical months entered by hand:
+                  // { '2026-01': { type: 'manual', manualTotals: { jointTotal, personalMax, personalOlya, incomeMax, incomeOlya } } }
   currentMonth: null,
+  startingSavings: { olya: 0, max: 0 }, // накопления на конец месяца перед первым загруженным месяцем
 };
 
 const TYPE_LABELS = {
@@ -863,11 +892,14 @@ function loadFromStorage() {
     try {
       const parsed = JSON.parse(saved);
       appState = { ...appState, ...parsed };
+      if (!appState.startingSavings) appState.startingSavings = { olya: 0, max: 0 };
       // Restore rates display
       if (appState.rates) {
         document.getElementById('rate-byn').value = appState.rates.BYN || '';
         document.getElementById('rate-eur').value = appState.rates.EUR || '';
       }
+      document.getElementById('start-savings-olya').value = appState.startingSavings.olya || '';
+      document.getElementById('start-savings-max').value = appState.startingSavings.max || '';
     } catch(e) { console.error('Load error', e); }
   }
 }
@@ -880,6 +912,10 @@ function saveSettings() {
     showToast('Введи корректные курсы валют', 'error'); return;
   }
   appState.rates = { BYN: byn, EUR: eur };
+  appState.startingSavings = {
+    olya: parseFloat(document.getElementById('start-savings-olya').value) || 0,
+    max: parseFloat(document.getElementById('start-savings-max').value) || 0,
+  };
   // Save category selections
   document.querySelectorAll('.cat-select').forEach(sel => {
     appState.categories[sel.dataset.cat] = sel.value;
@@ -1145,6 +1181,9 @@ function excelDateToJS(serial) {
   return new Date(excelEpoch.getTime() + Math.round(serial) * msPerDay);
 }
 
+// Historical months are entered directly into the ManualMonths sheet in Google Sheets
+// (see docs) — loadFromSheets() picks them up automatically, no in-app form needed.
+
 // ==================== CALCULATIONS ====================
 function toUSD(amount, currency, rates) {
   // rates.BYN = how many BYN per 1 USD (e.g. 3.27)
@@ -1168,26 +1207,36 @@ function calcMonth(monthKey) {
   let incomeOlya = 0, incomeMax = 0;
   const catTotals = {};
 
-  mData.transactions.forEach((tx, i) => {
-    let type = getEffectiveType(tx.category, categories);
-    // Apply per-transaction override for situational categories
-    if (type === 'situational') {
-      type = (mData.txOverrides && mData.txOverrides[i]) || 'olya';
-    }
-    if (type === 'ignore') return;
-    const usd = Math.abs(toUSD(tx.amount, tx.currency, rates));
-    if (!catTotals[tx.category]) catTotals[tx.category] = { type, usd: 0 };
-    catTotals[tx.category].usd += usd;
+  if (mData.type === 'manual') {
+    // Historical month entered as totals only — no transaction-level detail
+    const t = mData.manualTotals || {};
+    joint = t.jointTotal || 0;
+    mine = t.personalOlya || 0;
+    max = t.personalMax || 0;
+    incomeOlya = t.incomeOlya || 0;
+    incomeMax = t.incomeMax || 0;
+  } else {
+    mData.transactions.forEach((tx, i) => {
+      let type = getEffectiveType(tx.category, categories);
+      // Apply per-transaction override for situational categories
+      if (type === 'situational') {
+        type = (mData.txOverrides && mData.txOverrides[i]) || 'olya';
+      }
+      if (type === 'ignore') return;
+      const usd = Math.abs(toUSD(tx.amount, tx.currency, rates));
+      if (!catTotals[tx.category]) catTotals[tx.category] = { type, usd: 0 };
+      catTotals[tx.category].usd += usd;
 
-    if (tx.amount > 0) {
-      if (type === 'income-olya') incomeOlya += usd;
-      else if (type === 'income-max') incomeMax += usd;
-    } else {
-      if (type === 'joint') joint += usd;
-      else if (type === 'olya') mine += usd;
-      else if (type === 'max') max += usd;
-    }
-  });
+      if (tx.amount > 0) {
+        if (type === 'income-olya') incomeOlya += usd;
+        else if (type === 'income-max') incomeMax += usd;
+      } else {
+        if (type === 'joint') joint += usd;
+        else if (type === 'olya') mine += usd;
+        else if (type === 'max') max += usd;
+      }
+    });
+  }
 
   const jointEach = joint / 2;
   const olyaTotal = jointEach + mine;
@@ -1223,6 +1272,7 @@ function calcMonth(monthKey) {
     totalDebt,
     catTotals,
     olyaSavingsThisMonth: olyaBalance,
+    maxSavingsThisMonth: maxBalance,
     loadedAt: mData.loadedAt,
     snapshot: snap,
   };
@@ -1231,6 +1281,14 @@ function calcMonth(monthKey) {
 function calcMonthSimple(monthKey) {
   const mData = appState.months[monthKey];
   if (!mData) return null;
+
+  if (mData.type === 'manual') {
+    const t = mData.manualTotals || {};
+    const olyaTotal = (t.jointTotal || 0)/2 + (t.personalOlya || 0);
+    const maxTotal = (t.jointTotal || 0)/2 + (t.personalMax || 0);
+    return { debtThisMonth: (olyaTotal - maxTotal) / 2 };
+  }
+
   const snap = mData.snapshot || { rates: appState.rates, categories: appState.categories };
   const rates = snap.rates;
   const categories = snap.categories;
@@ -1329,39 +1387,18 @@ function renderMonthData(monthKey) {
     </tr>
   `;
 
-  // Debt block
-  const debtEl = document.getElementById('debtBlock');
-  const totalDebt = calc.totalDebt;
-  const absDebt = Math.abs(totalDebt);
-  let debtWho = '', debtText = '';
-  if (absDebt < 0.5) {
-    debtWho = 'Долгов нет';
-    debtText = 'Все в расчёте';
-  } else if (totalDebt > 0) {
-    debtWho = 'Макс должен Оле';
-    debtText = `$${absDebt.toFixed(2)}`;
-  } else {
-    debtWho = 'Оля должна Максу';
-    debtText = `$${absDebt.toFixed(2)}`;
-  }
-  debtEl.innerHTML = `
-    <div class="debt-block">
-      <div class="debt-label">${debtWho}</div>
-      <div class="debt-main">${debtText}</div>
-      <div class="debt-breakdown">
-        <div class="debt-row-item"><span>За этот месяц</span><span>${fmtSigned(calc.debtThisMonth)}</span></div>
-        <div class="debt-row-item"><span>С прошлых месяцев</span><span>${fmtSigned(calc.cumulativeDebt)}</span></div>
-      </div>
-    </div>
-  `;
-
-  // Savings
+  // Savings — cumulative for both Olya and Max, offset by the starting balance
   const allMonths = Object.keys(appState.months).sort();
   const monthIndex = allMonths.indexOf(monthKey);
-  let savingsYTD = 0;
+  const starting = appState.startingSavings || { olya: 0, max: 0 };
+  let olyaSavingsYTD = starting.olya || 0;
+  let maxSavingsYTD = starting.max || 0;
   for (let i = 0; i <= monthIndex; i++) {
     const c = calcMonth(allMonths[i]);
-    if (c) savingsYTD += c.olyaSavingsThisMonth;
+    if (c) {
+      olyaSavingsYTD += c.olyaSavingsThisMonth;
+      maxSavingsYTD += c.maxSavingsThisMonth;
+    }
   }
   document.getElementById('savingsBlock').innerHTML = `
     <div class="savings-card">
@@ -1371,7 +1408,19 @@ function renderMonthData(monthKey) {
     </div>
     <div class="savings-card">
       <div class="savings-label">Итого 2026</div>
-      <div class="savings-value" style="color:${savingsYTD >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtSigned(savingsYTD)}</div>
+      <div class="savings-value" style="color:${olyaSavingsYTD >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtSigned(olyaSavingsYTD)}</div>
+      <div class="savings-sub">нарастающим итогом</div>
+    </div>
+  `;
+  document.getElementById('maxSavingsBlock').innerHTML = `
+    <div class="savings-card">
+      <div class="savings-label">Этот месяц</div>
+      <div class="savings-value" style="color:${calc.maxSavingsThisMonth >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtSigned(calc.maxSavingsThisMonth)}</div>
+      <div class="savings-sub">доход − все траты Макса</div>
+    </div>
+    <div class="savings-card">
+      <div class="savings-label">Итого 2026</div>
+      <div class="savings-value" style="color:${maxSavingsYTD >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtSigned(maxSavingsYTD)}</div>
       <div class="savings-sub">нарастающим итогом</div>
     </div>
   `;
@@ -1380,7 +1429,8 @@ function renderMonthData(monthKey) {
 
 // ==================== HISTORY ====================
 function renderHistory() {
-  const months = Object.keys(appState.months).sort().reverse();
+  // Manual (historical) months have their own list below — keep this table to real file uploads
+  const months = Object.keys(appState.months).filter(m => appState.months[m].type !== 'manual').sort().reverse();
   const el = document.getElementById('historyBlock');
   if (months.length === 0) {
     el.innerHTML = `<div class="empty-state" style="padding:28px"><div class="empty-state-icon"></div><div class="empty-state-title">Загрузок пока нет</div></div>`;
@@ -1504,6 +1554,9 @@ async function loadFromSheets() {
 
     if (data.rates) appState.rates = data.rates;
     if (data.categories) appState.categories = data.categories;
+    appState.startingSavings = data.startingSavings || appState.startingSavings || { olya: 0, max: 0 };
+    document.getElementById('start-savings-olya').value = appState.startingSavings.olya || '';
+    document.getElementById('start-savings-max').value = appState.startingSavings.max || '';
     if (data.months && Object.keys(data.months).length > 0) {
       appState.months = {};
       Object.entries(data.months).forEach(([rawKey, mData]) => {
@@ -1540,12 +1593,52 @@ async function saveToSheets() {
         rates: appState.rates,
         categories: appState.categories,
         months: appState.months,
+        startingSavings: appState.startingSavings,
+        summaryRows: computeSummaryRows(),
       }
     });
     if (result.error) throw new Error(result.error);
   } catch(e) {
     console.error('saveToSheets error:', e);
   }
+}
+
+// Builds one row per month matching the Dashboard exactly — written to the
+// MonthlySummary sheet on every save so the spreadsheet always mirrors the app.
+function computeSummaryRows() {
+  const months = Object.keys(appState.months).sort();
+  const starting = appState.startingSavings || { olya: 0, max: 0 };
+  let olyaCum = starting.olya || 0;
+  let maxCum = starting.max || 0;
+  const rows = [];
+  months.forEach(monthKey => {
+    const c = calcMonth(monthKey);
+    if (!c) return;
+    olyaCum += c.olyaSavingsThisMonth;
+    maxCum += c.maxSavingsThisMonth;
+    const mData = appState.months[monthKey];
+    rows.push({
+      month: monthKey,
+      jointMax: c.jointEach,
+      jointOlya: c.jointEach,
+      jointTotal: c.joint,
+      personalMax: c.max,
+      personalOlya: c.mine,
+      personalTotal: c.mine + c.max,
+      totalSpendMax: c.maxTotal,
+      totalSpendOlya: c.olyaTotal,
+      totalSpendAll: c.olyaTotal + c.maxTotal,
+      incomeMax: c.incomeMax,
+      incomeOlya: c.incomeOlya,
+      incomeTotal: c.incomeOlya + c.incomeMax,
+      balanceMax: c.maxBalance,
+      balanceOlya: c.olyaBalance,
+      cumulativeSavingsMax: maxCum,
+      cumulativeSavingsOlya: olyaCum,
+      source: mData.type === 'manual' ? 'manual' : 'computed',
+    });
+  });
+  return rows;
 }
 
 async function forceSyncToSheets() {
