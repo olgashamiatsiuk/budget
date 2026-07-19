@@ -1710,10 +1710,22 @@ async function forceSyncToSheets() {
   btn.textContent = '⏳ Синхронизирую...';
   btn.disabled = true;
   try {
+    // Rebuild snapshots for all months using current settings
+    Object.keys(appState.months).forEach(monthKey => {
+      if (!appState.months[monthKey].snapshot ||
+          !appState.months[monthKey].snapshot.categories ||
+          Object.keys(appState.months[monthKey].snapshot.categories).length === 0) {
+        appState.months[monthKey].snapshot = {
+          rates: { ...appState.rates },
+          categories: { ...appState.categories },
+        };
+      }
+    });
     await saveToSheets();
     showToast('Данные синхронизированы ✓', 'success');
   } catch(e) {
     showToast('Ошибка синхронизации', 'error');
+    console.error(e);
   }
   btn.textContent = '☁️ Синхронизировать';
   btn.disabled = false;
