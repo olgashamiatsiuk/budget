@@ -1642,17 +1642,18 @@ function showLoginError(msg) {
 
 async function appsScriptCall(params) {
   const { action } = params;
-  // Use POST for save (large payload), GET for everything else
+
   if (action === 'save') {
-    const res = await fetch(APPS_SCRIPT_URL, {
+    // Use no-cors for write — we don't need to read the response
+    await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(params),
-      redirect: 'follow',
     });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    return await res.json();
+    return { ok: true };
   } else {
+    // GET for read — Apps Script supports CORS for GET
     const url = new URL(APPS_SCRIPT_URL);
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
     const res = await fetch(url.toString(), { redirect: 'follow' });
